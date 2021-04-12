@@ -1,0 +1,20 @@
+name: brazilian_banks
+description: Package to obtain brazilian bank codes/names, and account/digit validation
+version: 0.0.1
+author: Eduardo Sorensen <eduardo@credifit.com.br>
+homepage: https://github.com/credifit-br/brazilian_banks
+
+environment:
+  sdk: ">=2.7.0 <3.0.0"
+  flutter: ">=1.17.0"
+
+dependencies:
+  http: ">=0.13.1 <1.0.0"
+  flutter:
+    sdk: flutter
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+flutter:
