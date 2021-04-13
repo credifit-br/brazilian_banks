@@ -14,8 +14,8 @@ class _BanksPageState extends State<BanksPage> {
         title: Text('Lista de Bancos Brasileiros'),
       ),
       body: Center(
-        child: FutureBuilder<List<BrasilApiBanksModel>>(
-          future: BrasilApiBanksModel.getBanks(),
+        child: FutureBuilder<List<BrasilApiBanks>>(
+          future: BrasilApiBanks.getBanks(),
           builder: (context, snapshot) {
             if (snapshot.data == null) {
               return Container();
