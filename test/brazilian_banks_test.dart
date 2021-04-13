@@ -19,7 +19,8 @@ void main() {
     test('Banco do Brasil valid digit account', () {
       final validAccountWithDigit = '210169-6';
       final response = BankAccountValidation.validateAccountNumber(
-        accountNumber: validAccountWithDigit,
+        branchNumber: '',
+        accountNumberWithDigit: validAccountWithDigit,
         bankCode: 001,
       );
       expect(response.isValid, true);
@@ -27,7 +28,8 @@ void main() {
     test('Banco do Brasil invalid digit account', () {
       final validAccountWithDigit = '210169-X';
       final response = BankAccountValidation.validateAccountNumber(
-        accountNumber: validAccountWithDigit,
+        branchNumber: '',
+        accountNumberWithDigit: validAccountWithDigit,
         bankCode: 001,
       );
       expect(response.isValid, false);
@@ -36,7 +38,8 @@ void main() {
     test('Bradesco valid digit account', () {
       final validAccountWithDigit = '134562-1';
       final response = BankAccountValidation.validateAccountNumber(
-        accountNumber: validAccountWithDigit,
+        branchNumber: '',
+        accountNumberWithDigit: validAccountWithDigit,
         bankCode: 237,
       );
       expect(response.isValid, true);
@@ -45,18 +48,41 @@ void main() {
     test('Bradesco invalid digit account', () {
       final validAccountWithDigit = '3013570';
       final response = BankAccountValidation.validateAccountNumber(
-        accountNumber: validAccountWithDigit,
+        branchNumber: '',
+        accountNumberWithDigit: validAccountWithDigit,
         bankCode: 237,
       );
       expect(response.isValid, false);
       expect(response.digit, "P");
     });
-    test('Itau', () {
+    test('Itau valid digit account', () {
+      final branchNumber = '7043';
+      final validAccountWithDigit = '05624-6';
       final response = BankAccountValidation.validateAccountNumber(
-        accountNumber: '',
+        branchNumber: branchNumber,
+        accountNumberWithDigit: validAccountWithDigit,
         bankCode: 341,
       );
-      expect(response.errorMessage, "banco não suportado");
+      expect(response.isValid, true);
+    });
+    test('Itau invalid digit account', () {
+      final branchNumber = '7043';
+      final validAccountWithDigit = '06771-0';
+      final response = BankAccountValidation.validateAccountNumber(
+        branchNumber: branchNumber,
+        accountNumberWithDigit: validAccountWithDigit,
+        bankCode: 341,
+      );
+      expect(response.isValid, false);
+      expect(response.digit, "4");
+    });
+    test('Unsupported Bank', () {
+      final response = BankAccountValidation.validateAccountNumber(
+        branchNumber: '',
+        accountNumberWithDigit: '',
+        bankCode: 999,
+      );
+      expect(response.errorMessage, isNotNull);
     });
   });
 }

@@ -13,13 +13,13 @@ Brazilian Banks list and account/digit validation.
 import 'package:brazilian_banks/brazilian_banks.dart';
 ```
 
-## Fetch Brazilian Banks
+### Fetch Brazilian Banks
 
 ```dart
 final banks = await BrasilApiBanks.getBanks();
 ```
 
-## Validate Brazilian Bank Account Digit
+### Validate Brazilian Bank Account Digit
 
 Banks currently supported:
 
@@ -47,3 +47,8 @@ response = BankAccountValidation.validateAccountNumber(
     bankCode: 341,
 );
 ```
+
+## Contribute
+
+As you've seen, there are many more banks to be implemented.  
+Feel free to fork the project and throw us Pull Requests (just don't forget the unit test ;-))

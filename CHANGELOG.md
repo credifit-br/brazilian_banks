@@ -1,6 +1,6 @@
-## [0.2.0] - UNRELEASED
+## [0.2.0-dev] - UNRELEASED
 
-* Support more banks
+* Support Bradesco
 
 ## [0.1.1] - 2021-04-12
 
