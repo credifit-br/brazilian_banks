@@ -1,11 +1,11 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 
-import '../models/brasil_api_model.dart';
+import '../models/brasil_api_banks_model.dart';
 import 'interfaces/brasil_api_banks_repository_interface.dart';
 
 class BrasilApiBanksRepository implements IBrasilApiBanksRepository {
-  static var banks = <BrasilApiBanksModel>[];
+  static var banks = <BrasilApiBanks>[];
 
   @override
   loadBanks() async {
@@ -16,12 +16,12 @@ class BrasilApiBanksRepository implements IBrasilApiBanksRepository {
 
     _response = await http.get(_uri);
 
-    switch (_response?.statusCode) {
+    switch (_response.statusCode) {
       case 200:
-        var banks = <BrasilApiBanksModel>[];
+        var banks = <BrasilApiBanks>[];
         List parsedJson = json.decode(_response.body);
         for (var i = 0; i < parsedJson.length; i++) {
-          banks.add(BrasilApiBanksModel.fromJson(parsedJson[i]));
+          banks.add(BrasilApiBanks.fromJson(parsedJson[i]));
         }
         return banks;
       default:
