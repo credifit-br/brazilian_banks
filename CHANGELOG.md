@@ -1,3 +1,7 @@
+## [0.2.0] - 2021-04-13
+
+* Support Bradesco and Itau accounts
+
 ## [0.1.1] - 2021-04-12
 
 * Fix documentation

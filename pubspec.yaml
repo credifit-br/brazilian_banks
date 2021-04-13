@@ -1,6 +1,6 @@
 name: brazilian_banks
 description: Package to obtain brazilian bank codes/names, and account/digit validation
-version: 0.1.1
+version: 0.2.0
 homepage: https://github.com/credifit-br/brazilian_banks
 
 environment:

@@ -4,9 +4,9 @@ extension on String {
   List<String> splitByLength(int _length) => [substring(0, length - _length), substring(length - _length)];
 }
 
-const ACCOUNT_LEN = 8;
+const ACCOUNT_LEN = 5;
 
-BankAccountValidation bancoDoBrasilValidator(String accountNumberWithDigit) {
+BankAccountValidation itauValidator(String accountNumberWithDigit) {
   var _bankAccountValidation = BankAccountValidation();
 
   final _account = accountNumberWithDigit.replaceAll("-", "").splitByLength(1);
@@ -17,8 +17,9 @@ BankAccountValidation bancoDoBrasilValidator(String accountNumberWithDigit) {
   var sequence = 0;
 
   for (var i = 0; i < _numbers.length; i++) {
-    sequence = 9 - i;
-    sumSequence += int.parse(_numbers[i]) * sequence;
+    sequence = multiplyAccordingParity(int.parse(_numbers[i]), i);
+    sequence = adjustAccordingLength(sequence);
+    sumSequence += sequence;
   }
 
   var digit = module(sumSequence);
@@ -31,12 +32,24 @@ BankAccountValidation bancoDoBrasilValidator(String accountNumberWithDigit) {
 }
 
 String module(sumSequence) {
-  final result = 11 - (sumSequence % 11);
-  if (result == 10) {
-    return "X";
-  }
-  if (result == 11) {
+  final module = sumSequence % 10;
+  if (module == 0) {
     return "0";
   }
-  return result.toString();
+  return (10 - module).toString();
+}
+
+int multiplyAccordingParity(number, index) {
+  return number * (index % 2 == 0 ? 2 : 1);
+}
+
+int adjustAccordingLength(sequence) {
+  if (sequence > 9) {
+    final numbers = sequence.toString().split("");
+    sequence = 0;
+    for (var i = 0; i < numbers.length; i++) {
+      sequence += int.parse(numbers[i]);
+    }
+  }
+  return sequence;
 }
