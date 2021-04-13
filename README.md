@@ -2,10 +2,16 @@
 
 Brazilian Banks list and account/digit validation. We thank [BrasilApi](https://brasilapi.com.br/) for providing great api service with updated list.
 
+## Getting Started
+
+```dart
+import 'package:brazilian_banks/brazilian_banks.dart';
+```
+
 ## Fetch Brazilian Banks
 
 ```dart
-final banks = await BrasilApiBanksModel.getBanks();
+final banks = await BrasilApiBanks.getBanks();
 ```
 
 ## Validate Brazilian Bank Account Digit
@@ -27,5 +33,11 @@ var response = BankAccountValidation.validateAccountNumber(
 response = BankAccountValidation.validateAccountNumber(
     accountNumber: '210169-X',
     bankCode: 001,
+);
+
+/// response.errorMessage = "banco não suportado"
+response = BankAccountValidation.validateAccountNumber(
+    accountNumber: '12345-6',
+    bankCode: 341,
 );
 ```
