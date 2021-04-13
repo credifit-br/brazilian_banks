@@ -4,9 +4,9 @@ extension on String {
   List<String> splitByLength(int _length) => [substring(0, length - _length), substring(length - _length)];
 }
 
-const ACCOUNT_LEN = 8;
+const ACCOUNT_LEN = 7;
 
-BankAccountValidation bancoDoBrasilValidator(String accountNumberWithDigit) {
+BankAccountValidation bradescoValidator(String accountNumberWithDigit) {
   var _bankAccountValidation = BankAccountValidation();
 
   final _account = accountNumberWithDigit.replaceAll("-", "").splitByLength(1);
@@ -14,11 +14,9 @@ BankAccountValidation bancoDoBrasilValidator(String accountNumberWithDigit) {
   final _numbers = _accountNumber.split("");
 
   var sumSequence = 0;
-  var sequence = 0;
 
   for (var i = 0; i < _numbers.length; i++) {
-    sequence = 9 - i;
-    sumSequence += int.parse(_numbers[i]) * sequence;
+    sumSequence += multiplyAccordingWeight(int.parse(_numbers[i]), i);
   }
 
   var digit = module(sumSequence);
@@ -31,12 +29,17 @@ BankAccountValidation bancoDoBrasilValidator(String accountNumberWithDigit) {
 }
 
 String module(sumSequence) {
-  final result = 11 - (sumSequence % 11);
-  if (result == 10) {
-    return "X";
-  }
-  if (result == 11) {
+  final module = sumSequence % 11;
+  if (module == 0) {
     return "0";
   }
-  return result.toString();
+  if (module == 1) {
+    return "P";
+  }
+  return (11 - module).toString();
+}
+
+int multiplyAccordingWeight(number, i) {
+  final weight = [2, 7, 6, 5, 4, 3, 2];
+  return number * weight[i];
 }

@@ -33,6 +33,24 @@ void main() {
       expect(response.isValid, false);
       expect(response.digit, "6");
     });
+    test('Bradesco valid digit account', () {
+      final validAccountWithDigit = '134562-1';
+      final response = BankAccountValidation.validateAccountNumber(
+        accountNumber: validAccountWithDigit,
+        bankCode: 237,
+      );
+      expect(response.isValid, true);
+    });
+
+    test('Bradesco invalid digit account', () {
+      final validAccountWithDigit = '3013570';
+      final response = BankAccountValidation.validateAccountNumber(
+        accountNumber: validAccountWithDigit,
+        bankCode: 237,
+      );
+      expect(response.isValid, false);
+      expect(response.digit, "P");
+    });
     test('Itau', () {
       final response = BankAccountValidation.validateAccountNumber(
         accountNumber: '',

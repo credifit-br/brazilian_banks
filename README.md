@@ -1,6 +1,11 @@
 # Brazilian Banks
 
-Brazilian Banks list and account/digit validation. We thank [BrasilApi](https://brasilapi.com.br/) for providing great api service with updated list.
+Brazilian Banks list and account/digit validation.
+
+## Thanks to
+
+- [BrasilApi](https://brasilapi.com.br/) for providing great api service with updated list.
+- [br-bank-validator](https://github.com/fintta/br-bank-validator) for many bank account validations
 
 ## Getting Started
 
@@ -19,6 +24,7 @@ final banks = await BrasilApiBanks.getBanks();
 Banks currently supported:
 
 - Banco do Brasil (001)
+- Bradesco (237)
 
 ```dart
 /// response.isValid = true
