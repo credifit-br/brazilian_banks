@@ -25,27 +25,26 @@ Banks currently supported:
 
 - Banco do Brasil (001)
 - Bradesco (237)
+- Itau (341)
+
+Example:
 
 ```dart
-/// response.isValid = true
-/// response.digit = 6
 var response = BankAccountValidation.validateAccountNumber(
-    accountNumber: '210169-6',
-    bankCode: 001,
-);
-
-/// response.isValid = false
-/// response.digit = 6
-response = BankAccountValidation.validateAccountNumber(
-    accountNumber: '210169-X',
-    bankCode: 001,
-);
-
-/// response.errorMessage = "banco não suportado"
-response = BankAccountValidation.validateAccountNumber(
-    accountNumber: '12345-6',
+    branchNumber: '2545'
+    accountNumberWithDigit: '02366-1',
     bankCode: 341,
 );
+
+if (response.errorMessage == null) {
+    if (response.isValid) {
+        print('account digit is correct');
+    } else {
+        print('the correct account digit probably is ${response.digit}');
+    }
+} else {
+    print(response.errorMessage);
+}
 ```
 
 ## Contribute

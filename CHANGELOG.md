@@ -1,6 +1,6 @@
-## [0.2.0-dev] - UNRELEASED
+## [0.2.0] - 2021-04-13
 
-* Support Bradesco
+* Support Bradesco and Itau accounts
 
 ## [0.1.1] - 2021-04-12
 
