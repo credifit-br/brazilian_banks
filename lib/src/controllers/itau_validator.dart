@@ -6,12 +6,13 @@ extension on String {
 
 const ACCOUNT_LEN = 5;
 
-BankAccountValidation itauValidator(String accountNumberWithDigit) {
+BankAccountValidation itauValidator(String branchNumber, String accountNumberWithDigit) {
   var _bankAccountValidation = BankAccountValidation();
 
   final _account = accountNumberWithDigit.replaceAll("-", "").splitByLength(1);
   final _accountNumber = _account[0].padLeft(ACCOUNT_LEN, '0');
-  final _numbers = _accountNumber.split("");
+  final _branchAndAcccountNumber = branchNumber + _accountNumber;
+  final _numbers = _branchAndAcccountNumber.split("");
 
   var sumSequence = 0;
   var sequence = 0;

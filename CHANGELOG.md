@@ -1,3 +1,8 @@
+## [0.2.1-dev] - 2021-04-13
+
+* Fix errorMessage initialization
+* Fix Itau account return
+
 ## [0.2.0] - 2021-04-13
 
 * Support Bradesco and Itau accounts

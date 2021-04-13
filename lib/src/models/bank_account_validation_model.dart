@@ -3,10 +3,10 @@ import 'package:brazilian_banks/src/controllers/bradesco_validator.dart';
 import 'package:brazilian_banks/src/controllers/itau_validator.dart';
 
 class BankAccountValidation {
-  late bool isValid;
-  late String digit;
-  late String account;
-  late String errorMessage;
+  bool? isValid;
+  String? digit;
+  String? account;
+  String? errorMessage;
 
   /// @param accountNumber: should receive full account number, with digit
   /// @param bankCode: should receive three digit Brazilian bank code
@@ -22,7 +22,7 @@ class BankAccountValidation {
       case 237:
         return bradescoValidator(accountNumberWithDigit);
       case 341:
-        return itauValidator(branchNumber + accountNumberWithDigit);
+        return itauValidator(branchNumber, accountNumberWithDigit);
       default:
         _bankAccountValidation.errorMessage = "banco não suportado";
         return _bankAccountValidation;
