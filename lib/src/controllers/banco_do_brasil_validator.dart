@@ -1,3 +1,5 @@
+/// Thanks to https://github.com/fintta/br-bank-validator for the base code
+
 import '../../brazilian_banks.dart';
 
 extension on String {
