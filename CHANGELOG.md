@@ -1,4 +1,4 @@
-## [0.2.1-dev] - 2021-04-13
+## [0.2.1] - 2021-04-14
 
 * Fix errorMessage initialization
 * Fix Itau account return

@@ -1,12 +1,16 @@
 import '../../brazilian_banks.dart';
 
 extension on String {
-  List<String> splitByLength(int _length) => [substring(0, length - _length), substring(length - _length)];
+  List<String> splitByLength(int _length) =>
+      [substring(0, length - _length), substring(length - _length)];
 }
 
 const ACCOUNT_LEN = 5;
 
-BankAccountValidation itauValidator(String branchNumber, String accountNumberWithDigit) {
+/// Itau - 341
+/// @param accountNumberWithDigit: can be in format "#-0" or "#0"
+BankAccountValidation itauValidator(
+    String branchNumber, String accountNumberWithDigit) {
   var _bankAccountValidation = BankAccountValidation();
 
   final _account = accountNumberWithDigit.replaceAll("-", "").splitByLength(1);

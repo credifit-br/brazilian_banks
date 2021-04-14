@@ -8,6 +8,7 @@ class BankAccountValidation {
   String? account;
   String? errorMessage;
 
+  /// @param branchNumber: necessary for some banks validation, such as Itau
   /// @param accountNumber: should receive full account number, with digit
   /// @param bankCode: should receive three digit Brazilian bank code
   static BankAccountValidation validateAccountNumber({

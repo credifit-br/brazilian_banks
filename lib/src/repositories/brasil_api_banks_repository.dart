@@ -4,6 +4,7 @@ import 'package:http/http.dart' as http;
 import '../models/brasil_api_banks_model.dart';
 import 'interfaces/brasil_api_banks_repository_interface.dart';
 
+/// Implementation for Brasil Api Banks repository
 class BrasilApiBanksRepository implements IBrasilApiBanksRepository {
   static var banks = <BrasilApiBanks>[];
 

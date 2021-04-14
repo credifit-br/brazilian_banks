@@ -2,11 +2,6 @@
 
 Brazilian Banks list and account/digit validation.
 
-## Thanks to
-
-- [BrasilApi](https://brasilapi.com.br/) for providing great api service with updated list.
-- [br-bank-validator](https://github.com/fintta/br-bank-validator) for many bank account validations
-
 ## Getting Started
 
 ```dart
@@ -51,3 +46,8 @@ if (response.errorMessage == null) {
 
 As you've seen, there are many more banks to be implemented.  
 Feel free to fork the project and throw us Pull Requests (just don't forget the unit test ;-))
+
+## Thanks to
+
+- [BrasilApi](https://brasilapi.com.br/) for providing great api service with updated list.
+- [br-bank-validator](https://github.com/fintta/br-bank-validator) for many bank account validations

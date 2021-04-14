@@ -1,6 +1,7 @@
 import 'package:brazilian_banks/src/repositories/brasil_api_banks_repository.dart';
 
 /// Brasil Api Banks Model
+/// getbanks() return a list of banks with object compatible with BrasilApi banks
 class BrasilApiBanks {
   BrasilApiBanks({
     this.ispb,
@@ -21,5 +22,6 @@ class BrasilApiBanks {
         fullName: json["fullName"],
       );
 
-  static Future<List<BrasilApiBanks>> getBanks() async => await BrasilApiBanksRepository().loadBanks();
+  static Future<List<BrasilApiBanks>> getBanks() async =>
+      await BrasilApiBanksRepository().loadBanks();
 }

@@ -1,11 +1,14 @@
 import '../../brazilian_banks.dart';
 
 extension on String {
-  List<String> splitByLength(int _length) => [substring(0, length - _length), substring(length - _length)];
+  List<String> splitByLength(int _length) =>
+      [substring(0, length - _length), substring(length - _length)];
 }
 
 const ACCOUNT_LEN = 7;
 
+/// Bradesco - 237
+/// @param accountNumberWithDigit: can be in format "#-0" or "#0"
 BankAccountValidation bradescoValidator(String accountNumberWithDigit) {
   var _bankAccountValidation = BankAccountValidation();
 
