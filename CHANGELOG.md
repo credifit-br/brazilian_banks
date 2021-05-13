@@ -1,3 +1,8 @@
+## [0.3.0] - 2021-05-13
+
+* Support CEF (Caixa Econômica Federal) account
+* Refactor bank account model
+
 ## [0.2.1] - 2021-04-14
 
 * Fix errorMessage initialization

@@ -20,15 +20,18 @@ Banks currently supported:
 
 - Banco do Brasil (001)
 - Bradesco (237)
+- CEF - Caixa Econômica Federal (104)
 - Itau (341)
 
 Example:
 
 ```dart
 var response = BankAccountValidation.validateAccountNumber(
-    branchNumber: '2545'
-    accountNumberWithDigit: '02366-1',
-    bankCode: 341,
+    bankAccountModel: BankAccountModel(
+        bankCode: 341,
+        branchNumber: '2545',
+        accountNumberWithDigit: '02366-1',
+        accountType: AccountType.checking),
 );
 
 if (response.errorMessage == null) {
