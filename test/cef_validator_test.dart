@@ -16,6 +16,8 @@ void main() {
         ),
       );
       expect(response.isValid, true);
+      expect(response.account, '00000448');
+      expect(response.digit, '6');
     });
     test('CEF invalid digit account', () {
       final invalidAccountWithDigit = '00000448-5';
@@ -28,6 +30,7 @@ void main() {
         ),
       );
       expect(response.isValid, false);
+      expect(response.account, '00000448');
       expect(response.digit, "6");
     });
   });

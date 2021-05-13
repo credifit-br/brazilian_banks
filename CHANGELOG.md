@@ -1,3 +1,7 @@
+## [0.3.3-dev] - 2021-05-13
+
+* Fix: return of CEF account without account type prefix
+
 ## [0.3.2] - 2021-05-13
 
 * Fix: rename savings for saving due to compatibility

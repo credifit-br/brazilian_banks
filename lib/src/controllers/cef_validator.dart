@@ -41,7 +41,7 @@ BankAccountValidation cefValidator(BankAccountModel bankAccountModel) {
 
   _bankAccountValidation.isValid = digit == _account[1];
   _bankAccountValidation.digit = digit;
-  _bankAccountValidation.account = _accountNumber;
+  _bankAccountValidation.account = _account[0].padLeft(ACCOUNT_LEN, '0');
 
   return _bankAccountValidation;
 }
