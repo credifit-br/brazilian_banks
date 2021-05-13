@@ -1,3 +1,5 @@
+import 'package:brazilian_banks/src/models/bank_account_model.dart';
+
 import '../../brazilian_banks.dart';
 
 extension on String {
@@ -9,13 +11,15 @@ const ACCOUNT_LEN = 5;
 
 /// Itau - 341
 /// @param accountNumberWithDigit: can be in format "#-0" or "#0"
-BankAccountValidation itauValidator(
-    String branchNumber, String accountNumberWithDigit) {
+BankAccountValidation itauValidator(BankAccountModel bankAccountModel) {
   var _bankAccountValidation = BankAccountValidation();
 
-  final _account = accountNumberWithDigit.replaceAll("-", "").splitByLength(1);
+  final _account = bankAccountModel.accountNumberWithDigit
+      .replaceAll("-", "")
+      .splitByLength(1);
   final _accountNumber = _account[0].padLeft(ACCOUNT_LEN, '0');
-  final _branchAndAcccountNumber = branchNumber + _accountNumber;
+  final _branchAndAcccountNumber =
+      bankAccountModel.branchNumber + _accountNumber;
   final _numbers = _branchAndAcccountNumber.split("");
 
   var sumSequence = 0;

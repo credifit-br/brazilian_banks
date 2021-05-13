@@ -1,3 +1,5 @@
+import 'package:brazilian_banks/src/models/bank_account_model.dart';
+
 import '../../brazilian_banks.dart';
 
 extension on String {
@@ -9,10 +11,13 @@ const ACCOUNT_LEN = 8;
 
 /// Banco do Brasil - 001
 /// @param accountNumberWithDigit: can be in format "#-0" or "#0"
-BankAccountValidation bancoDoBrasilValidator(String accountNumberWithDigit) {
+BankAccountValidation bancoDoBrasilValidator(
+    BankAccountModel bankAccountModel) {
   var _bankAccountValidation = BankAccountValidation();
 
-  final _account = accountNumberWithDigit.replaceAll("-", "").splitByLength(1);
+  final _account = bankAccountModel.accountNumberWithDigit
+      .replaceAll("-", "")
+      .splitByLength(1);
   final _accountNumber = _account[0].padLeft(ACCOUNT_LEN, '0');
   final _numbers = _accountNumber.split("");
 

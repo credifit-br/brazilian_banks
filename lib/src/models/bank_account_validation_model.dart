@@ -1,6 +1,8 @@
 import 'package:brazilian_banks/src/controllers/banco_do_brasil_validator.dart';
 import 'package:brazilian_banks/src/controllers/bradesco_validator.dart';
+import 'package:brazilian_banks/src/controllers/cef_validator.dart';
 import 'package:brazilian_banks/src/controllers/itau_validator.dart';
+import 'package:brazilian_banks/src/models/bank_account_model.dart';
 
 class BankAccountValidation {
   bool? isValid;
@@ -12,18 +14,18 @@ class BankAccountValidation {
   /// @param accountNumber: should receive full account number, with digit
   /// @param bankCode: should receive three digit Brazilian bank code
   static BankAccountValidation validateAccountNumber({
-    required String branchNumber,
-    required String accountNumberWithDigit,
-    required int bankCode,
+    required BankAccountModel bankAccountModel,
   }) {
     var _bankAccountValidation = BankAccountValidation();
-    switch (bankCode) {
+    switch (bankAccountModel.bankCode) {
       case 001:
-        return bancoDoBrasilValidator(accountNumberWithDigit);
+        return bancoDoBrasilValidator(bankAccountModel);
       case 237:
-        return bradescoValidator(accountNumberWithDigit);
+        return bradescoValidator(bankAccountModel);
+      case 104:
+        return cefValidator(bankAccountModel);
       case 341:
-        return itauValidator(branchNumber, accountNumberWithDigit);
+        return itauValidator(bankAccountModel);
       default:
         _bankAccountValidation.errorMessage = "banco não suportado";
         return _bankAccountValidation;
