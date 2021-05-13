@@ -7,31 +7,37 @@ extension on String {
       [substring(0, length - _length), substring(length - _length)];
 }
 
-const ACCOUNT_LEN = 5;
+const ACCOUNT_LEN = 8;
+const MULTIPLIERS = [8, 7, 6, 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2];
 
-/// Itau - 341
+/// CEF - Caixa Econômica Federal - 104
+/// @param branchNumber: branch (agência) number with 4 digits
 /// @param accountNumberWithDigit: can be in format "#-0" or "#0"
-BankAccountValidation itauValidator(BankAccountModel bankAccountModel) {
+/// @docs  Example:
+/// @docs    Branch: 2004
+/// @docs    Account: 00100000448-6
+/// @docs      Os três primeiros dígitos da conta são o tipo da conta
+/// @docs      (001 para Conta Corrente e 013 para Poupança)
+BankAccountValidation cefValidator(BankAccountModel bankAccountModel) {
   var _bankAccountValidation = BankAccountValidation();
 
   final _account = bankAccountModel.accountNumberWithDigit
       .replaceAll("-", "")
       .splitByLength(1);
-  final _accountNumber = _account[0].padLeft(ACCOUNT_LEN, '0');
+  final _accountPrefix =
+      bankAccountModel.accountType == AccountType.checking ? '001' : '013';
+  final _accountNumber = _accountPrefix + _account[0].padLeft(ACCOUNT_LEN, '0');
   final _branchAndAcccountNumber =
       bankAccountModel.branchNumber + _accountNumber;
   final _numbers = _branchAndAcccountNumber.split("");
 
   var sumSequence = 0;
-  var sequence = 0;
 
   for (var i = 0; i < _numbers.length; i++) {
-    sequence = multiplyAccordingParity(int.parse(_numbers[i]), i);
-    sequence = adjustAccordingLength(sequence);
-    sumSequence += sequence;
+    sumSequence += int.parse(_numbers[i]) * MULTIPLIERS[i];
   }
 
-  var digit = module(sumSequence);
+  var digit = module(sumSequence * 10);
 
   _bankAccountValidation.isValid = digit == _account[1];
   _bankAccountValidation.digit = digit;
@@ -41,24 +47,9 @@ BankAccountValidation itauValidator(BankAccountModel bankAccountModel) {
 }
 
 String module(sumSequence) {
-  final module = sumSequence % 10;
-  if (module == 0) {
+  final result = sumSequence % 11;
+  if (result == 10) {
     return "0";
   }
-  return (10 - module).toString();
-}
-
-int multiplyAccordingParity(number, index) {
-  return number * (index % 2 == 0 ? 2 : 1);
-}
-
-int adjustAccordingLength(sequence) {
-  if (sequence > 9) {
-    final numbers = sequence.toString().split("");
-    sequence = 0;
-    for (var i = 0; i < numbers.length; i++) {
-      sequence += int.parse(numbers[i]);
-    }
-  }
-  return sequence;
+  return result.toString();
 }
