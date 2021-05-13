@@ -1,7 +1,7 @@
 /// BankAccountModel
 /// @param branchNumber: 4 digit branch number (agência)
 /// @param accountNumberWithDigit: can be in format "#-0" or "#0"
-/// @param accountType: checking or savings
+/// @param accountType: checking or saving
 class BankAccountModel {
   final int bankCode;
   final String branchNumber;
@@ -17,8 +17,8 @@ class BankAccountModel {
 
 /// AccountType
 /// @param checking: Conta Corrente
-/// @param savings: Conta Poupança
+/// @param saving: Conta Poupança
 enum AccountType {
   checking,
-  savings,
+  saving,
 }
