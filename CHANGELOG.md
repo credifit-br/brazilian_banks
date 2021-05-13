@@ -1,3 +1,7 @@
+## [0.3.1] - 2021-05-13
+
+* Fix: export bank_account_model
+
 ## [0.3.0] - 2021-05-13
 
 * Support CEF (Caixa Econômica Federal) account
