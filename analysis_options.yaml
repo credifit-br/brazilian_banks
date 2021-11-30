@@ -5,5 +5,7 @@ linter:
   rules:
 
     always_use_package_imports: true
+    avoid_dynamic_calls: true
+    
     sort_pub_dependencies: false
 
