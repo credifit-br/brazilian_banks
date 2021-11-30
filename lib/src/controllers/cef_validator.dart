@@ -1,6 +1,5 @@
 import 'package:brazilian_banks/src/models/bank_account_model.dart';
-
-import '../../brazilian_banks.dart';
+import 'package:brazilian_banks/src/models/bank_account_validation_model.dart';
 
 extension on String {
   List<String> splitByLength(int _length) =>

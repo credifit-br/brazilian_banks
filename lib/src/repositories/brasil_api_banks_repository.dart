@@ -1,8 +1,7 @@
 import 'dart:convert';
+import 'package:brazilian_banks/src/models/brasil_api_banks_model.dart';
+import 'package:brazilian_banks/src/repositories/interfaces/brasil_api_banks_repository_interface.dart';
 import 'package:http/http.dart' as http;
-
-import '../models/brasil_api_banks_model.dart';
-import 'interfaces/brasil_api_banks_repository_interface.dart';
 
 /// Implementation for Brasil Api Banks repository
 class BrasilApiBanksRepository implements IBrasilApiBanksRepository {

@@ -1,6 +1,9 @@
 include: package:lint/analysis_options.yaml
 
 linter:
+
   rules:
-    public_member_api_docs: true
+
+    always_use_package_imports: true
     sort_pub_dependencies: false
+
