@@ -16,12 +16,12 @@ class BrasilApiBanks {
   final String? fullName;
 
   factory BrasilApiBanks.fromJson(Map<String, dynamic> json) => BrasilApiBanks(
-        ispb: json["ispb"],
-        name: json["name"],
-        code: json["code"],
-        fullName: json["fullName"],
+        ispb: json["ispb"] as String?,
+        name: json["name"] as String?,
+        code: json["code"] as int?,
+        fullName: json["fullName"] as String?,
       );
 
   static Future<List<BrasilApiBanks>> getBanks() async =>
-      await BrasilApiBanksRepository().loadBanks();
+      BrasilApiBanksRepository().loadBanks();
 }

@@ -6,12 +6,12 @@ import 'interfaces/brasil_api_banks_repository_interface.dart';
 
 /// Implementation for Brasil Api Banks repository
 class BrasilApiBanksRepository implements IBrasilApiBanksRepository {
-  static var banks = <BrasilApiBanks>[];
+  static List<BrasilApiBanks> banks = [];
 
   @override
-  loadBanks() async {
-    final baseApiUrl = "https://brasilapi.com.br/api";
-    final api = "/banks/v1";
+  Future<List<BrasilApiBanks>> loadBanks() async {
+    const baseApiUrl = "https://brasilapi.com.br/api";
+    const api = "/banks/v1";
     final _uri = Uri.parse("$baseApiUrl$api");
     http.Response _response;
 
@@ -19,8 +19,9 @@ class BrasilApiBanksRepository implements IBrasilApiBanksRepository {
 
     switch (_response.statusCode) {
       case 200:
-        var banks = <BrasilApiBanks>[];
-        List parsedJson = json.decode(_response.body);
+        final banks = <BrasilApiBanks>[];
+        final List<Map<String, dynamic>> parsedJson =
+            json.decode(_response.body) as List<Map<String, dynamic>>;
         for (var i = 0; i < parsedJson.length; i++) {
           banks.add(BrasilApiBanks.fromJson(parsedJson[i]));
         }

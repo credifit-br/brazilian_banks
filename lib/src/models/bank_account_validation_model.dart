@@ -10,13 +10,21 @@ class BankAccountValidation {
   String? account;
   String? errorMessage;
 
-  /// @param branchNumber: necessary for some banks validation, such as Itau
-  /// @param accountNumber: should receive full account number, with digit
+  BankAccountValidation({
+    this.isValid,
+    this.digit,
+    this.account,
+    this.errorMessage,
+  });
+
+  /// @param accountType: checking or saving
   /// @param bankCode: should receive three digit Brazilian bank code
-  static BankAccountValidation validateAccountNumber({
+  /// @param branchNumber: necessary for some banks validation, such as Itau
+  /// @param accountNumberWithDigit: should receive full account number, with digit
+  factory BankAccountValidation.validateAccountNumber({
     required BankAccountModel bankAccountModel,
   }) {
-    var _bankAccountValidation = BankAccountValidation();
+    final _bankAccountValidation = BankAccountValidation();
     switch (bankAccountModel.bankCode) {
       case 001:
         return bancoDoBrasilValidator(bankAccountModel);

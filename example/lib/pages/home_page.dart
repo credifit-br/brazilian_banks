@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'banks_page.dart';
 
 class HomePage extends StatefulWidget {
-  HomePage({Key key, this.title}) : super(key: key);
+  const HomePage({Key key, this.title}) : super(key: key);
 
   final String title;
 
@@ -23,7 +23,8 @@ class _HomePageState extends State<HomePage> {
           children: [
             TextButton(
               onPressed: () {
-                Navigator.push(context, MaterialPageRoute(builder: (_) => BanksPage()));
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (_) => const BanksPage()));
               },
               child: Text(
                 'Lista de Bancos Brasileiros',

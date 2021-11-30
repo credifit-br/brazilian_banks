@@ -8,11 +8,12 @@ class BankAccountModel {
   final String accountNumberWithDigit;
   final AccountType accountType;
 
-  BankAccountModel(
-      {required this.bankCode,
-      required this.branchNumber,
-      required this.accountNumberWithDigit,
-      required this.accountType});
+  BankAccountModel({
+    required this.bankCode,
+    required this.branchNumber,
+    required this.accountNumberWithDigit,
+    required this.accountType,
+  });
 }
 
 /// AccountType

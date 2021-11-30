@@ -2,6 +2,8 @@ import 'package:brazilian_banks/brazilian_banks.dart';
 import 'package:flutter/material.dart';
 
 class BanksPage extends StatefulWidget {
+  const BanksPage({Key key}) : super(key: key);
+
   @override
   _BanksPageState createState() => _BanksPageState();
 }
@@ -11,7 +13,7 @@ class _BanksPageState extends State<BanksPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Lista de Bancos Brasileiros'),
+        title: const Text('Lista de Bancos Brasileiros'),
       ),
       body: Center(
         child: FutureBuilder<List<BrasilApiBanks>>(
