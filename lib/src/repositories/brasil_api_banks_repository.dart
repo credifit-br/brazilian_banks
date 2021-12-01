@@ -5,6 +5,7 @@ import 'package:http/http.dart' as http;
 
 /// Implementation for Brasil Api Banks repository
 class BrasilApiBanksRepository implements IBrasilApiBanksRepository {
+  /// @var List of Brazilian banks
   static List<BrasilApiBanks> banks = [];
 
   @override
