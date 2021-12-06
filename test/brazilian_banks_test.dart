@@ -1,5 +1,6 @@
 import 'package:brazilian_banks/brazilian_banks.dart';
 import 'package:brazilian_banks/src/models/bank_account_model.dart';
+import 'package:brazilian_banks/src/services/bank_account_validation_service.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
@@ -19,7 +20,7 @@ void main() {
   group('bank account validation', () {
     test('Banco do Brasil valid digit account', () {
       const validAccountWithDigit = '210169-6';
-      final response = BankAccountValidation.validateAccountNumber(
+      final response = BankAccountValidationService().validateAccountNumber(
         bankAccountModel: BankAccountModel(
           bankCode: 001,
           branchNumber: '',
@@ -31,7 +32,7 @@ void main() {
     });
     test('Banco do Brasil invalid digit account', () {
       const invalidAccountWithDigit = '210169-X';
-      final response = BankAccountValidation.validateAccountNumber(
+      final response = BankAccountValidationService().validateAccountNumber(
         bankAccountModel: BankAccountModel(
           bankCode: 001,
           branchNumber: '',
@@ -44,7 +45,7 @@ void main() {
     });
     test('Bradesco valid digit account', () {
       const validAccountWithDigit = '134562-1';
-      final response = BankAccountValidation.validateAccountNumber(
+      final response = BankAccountValidationService().validateAccountNumber(
         bankAccountModel: BankAccountModel(
           bankCode: 237,
           branchNumber: '',
@@ -57,7 +58,7 @@ void main() {
 
     test('Bradesco invalid digit account', () {
       const invalidAccountWithDigit = '3013570';
-      final response = BankAccountValidation.validateAccountNumber(
+      final response = BankAccountValidationService().validateAccountNumber(
         bankAccountModel: BankAccountModel(
           bankCode: 237,
           branchNumber: '',
@@ -70,7 +71,7 @@ void main() {
     });
     test('Itau valid digit account', () {
       const validAccountWithDigit = '02366-1';
-      final response = BankAccountValidation.validateAccountNumber(
+      final response = BankAccountValidationService().validateAccountNumber(
         bankAccountModel: BankAccountModel(
           bankCode: 341,
           branchNumber: '2545',
@@ -82,7 +83,7 @@ void main() {
     });
     test('Itau invalid digit account', () {
       const invalidAccountWithDigit = '02366-0';
-      final response = BankAccountValidation.validateAccountNumber(
+      final response = BankAccountValidationService().validateAccountNumber(
         bankAccountModel: BankAccountModel(
           bankCode: 341,
           branchNumber: '2545',
@@ -94,7 +95,7 @@ void main() {
       expect(response.digit, "1");
     });
     test('Unsupported Bank', () {
-      final response = BankAccountValidation.validateAccountNumber(
+      final response = BankAccountValidationService().validateAccountNumber(
         bankAccountModel: BankAccountModel(
           bankCode: 999,
           branchNumber: '',

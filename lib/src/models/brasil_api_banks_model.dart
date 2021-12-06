@@ -24,7 +24,7 @@ class BrasilApiBanks {
   final String? fullName;
 
   /// @methods format json for BrasilApiBanks
-  factory BrasilApiBanks.fromJson(Map<String, dynamic> json) => BrasilApiBanks(
+  factory BrasilApiBanks.fromJson(Map json) => BrasilApiBanks(
         ispb: json["ispb"] as String?,
         name: json["name"] as String?,
         code: json["code"] as int?,

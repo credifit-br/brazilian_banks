@@ -8,8 +8,6 @@ import 'package:brazilian_banks/src/services/interfaces/bank_account_validation_
 
 /// @class Service to validate account number
 class BankAccountValidationService extends IBankAccountValidationService {
-  BankAccountValidationService._();
-
   @override
   BankAccountValidation validateAccountNumber({
     required BankAccountModel bankAccountModel,

@@ -20,10 +20,10 @@ class BrasilApiBanksRepository implements IBrasilApiBanksRepository {
     switch (_response.statusCode) {
       case 200:
         final banks = <BrasilApiBanks>[];
-        final List<Map<String, dynamic>> parsedJson =
-            json.decode(_response.body) as List<Map<String, dynamic>>;
+        final List<dynamic> parsedJson =
+            json.decode(_response.body) as List<dynamic>;
         for (var i = 0; i < parsedJson.length; i++) {
-          banks.add(BrasilApiBanks.fromJson(parsedJson[i]));
+          banks.add(BrasilApiBanks.fromJson(parsedJson[i] as Map));
         }
         return banks;
       default:
