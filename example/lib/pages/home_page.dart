@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'banks_page.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({Key key, this.title}) : super(key: key);
+  const HomePage({Key? key, required this.title}) : super(key: key);
 
   final String title;
 
