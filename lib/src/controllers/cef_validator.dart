@@ -6,8 +6,8 @@ extension on String {
       [substring(0, length - _length), substring(length - _length)];
 }
 
-const accountLen = 8;
-const multipliers = [8, 7, 6, 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2];
+const _accountLen = 8;
+const _multipliers = [8, 7, 6, 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2];
 
 /// CEF - Caixa Econômica Federal - 104
 /// @param branchNumber: branch (agência) number with 4 digits
@@ -25,7 +25,7 @@ BankAccountValidation cefValidator(BankAccountModel bankAccountModel) {
       .splitByLength(1);
   final _accountPrefix =
       bankAccountModel.accountType == AccountType.checking ? '001' : '013';
-  final _accountNumber = _accountPrefix + _account[0].padLeft(accountLen, '0');
+  final _accountNumber = _accountPrefix + _account[0].padLeft(_accountLen, '0');
   final _branchAndAcccountNumber =
       bankAccountModel.branchNumber + _accountNumber;
   final _numbers = _branchAndAcccountNumber.split("");
@@ -33,19 +33,19 @@ BankAccountValidation cefValidator(BankAccountModel bankAccountModel) {
   var sumSequence = 0;
 
   for (var i = 0; i < _numbers.length; i++) {
-    sumSequence += int.parse(_numbers[i]) * multipliers[i];
+    sumSequence += int.parse(_numbers[i]) * _multipliers[i];
   }
 
-  final digit = module(sumSequence * 10);
+  final digit = _module(sumSequence * 10);
 
   _bankAccountValidation.isValid = digit == _account[1];
   _bankAccountValidation.digit = digit;
-  _bankAccountValidation.account = _account[0].padLeft(accountLen, '0');
+  _bankAccountValidation.account = _account[0].padLeft(_accountLen, '0');
 
   return _bankAccountValidation;
 }
 
-String module(int sumSequence) {
+String _module(int sumSequence) {
   final result = sumSequence % 11;
   if (result == 10) {
     return "0";

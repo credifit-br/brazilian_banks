@@ -6,7 +6,7 @@ extension on String {
       [substring(0, length - _length), substring(length - _length)];
 }
 
-const accountLen = 8;
+const _accountLen = 8;
 
 /// Banco do Brasil - 001
 /// @param accountNumberWithDigit: can be in format "#-0" or "#0"
@@ -18,7 +18,7 @@ BankAccountValidation bancoDoBrasilValidator(
   final _account = bankAccountModel.accountNumberWithDigit
       .replaceAll("-", "")
       .splitByLength(1);
-  final _accountNumber = _account[0].padLeft(accountLen, '0');
+  final _accountNumber = _account[0].padLeft(_accountLen, '0');
   final _numbers = _accountNumber.split("");
 
   var sumSequence = 0;
@@ -29,7 +29,7 @@ BankAccountValidation bancoDoBrasilValidator(
     sumSequence += int.parse(_numbers[i]) * sequence;
   }
 
-  final digit = module(sumSequence);
+  final digit = _module(sumSequence);
 
   _bankAccountValidation.isValid = digit == _account[1];
   _bankAccountValidation.digit = digit;
@@ -38,7 +38,7 @@ BankAccountValidation bancoDoBrasilValidator(
   return _bankAccountValidation;
 }
 
-String module(int sumSequence) {
+String _module(int sumSequence) {
   final result = 11 - (sumSequence % 11);
   if (result == 10) {
     return "X";
