@@ -3,7 +3,7 @@ import 'package:brazilian_banks/src/repositories/brasil_api_banks_repository.dar
 /// @model Brasil Api Banks Model
 /// with BrasilApi banks
 class BrasilApiBanks {
-  /// @construct BrasilApiBanks
+  /// @construct [BrasilApiBanks]s
   BrasilApiBanks({
     this.ispb,
     this.name,
@@ -11,16 +11,16 @@ class BrasilApiBanks {
     this.fullName,
   });
 
-  /// @var Identifier in the Brazilian Payment System
+  /// @var Identifier in the Brazilian Payment System [ispb]
   final String? ispb;
 
-  /// @var Bank name
+  /// @var Bank [name]
   final String? name;
 
-  /// @var Bank code
+  /// @var Bank [code]
   final int? code;
 
-  /// @var Bank full name
+  /// @var Bank [fullName]
   final String? fullName;
 
   /// @methods format json for BrasilApiBanks
