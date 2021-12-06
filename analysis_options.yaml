@@ -23,4 +23,5 @@ linter:
     package_api_docs: true
     public_member_api_docs: true
     type_annotate_public_apis: true
+    sort_pub_dependencies: false
 
