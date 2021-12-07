@@ -17,7 +17,23 @@ class AccountInputFormatter extends TextInputFormatter {
     TextEditingValue oldValue,
     TextEditingValue newValue,
   ) {
+    // ignore: parameter_assignments
+    newValue = newValue.copyWith(
+      text: newValue.text.replaceAll(
+        RegExp(r'[!@#$%&*\(\)\-\_\\\=\+\[\]\{\}\/\?\:\;\>\<\,\.\°\º\ª]'),
+        "",
+      ),
+    );
     if (_bankAccountLength != 0) {
+      if (bankCode == 001) {
+        if (newValue.text.contains(RegExp('[A-W, Y-Z, a-w, y-z]'))) {
+          return oldValue;
+        }
+      } else if (bankCode == 237) {
+        if (newValue.text.contains(RegExp('[A-O, Q-Z, a-o, q-z]'))) {
+          return oldValue;
+        }
+      }
       if (newValue.text.length > 1) {
         // ignore: parameter_assignments
         newValue = newValue.copyWith(
@@ -63,6 +79,9 @@ class AccountInputFormatter extends TextInputFormatter {
         ),
       );
     } else {
+      if (newValue.text.contains(RegExp('[A-Z, a-z]'))) {
+        return oldValue;
+      }
       final accountTextList =
           newValue.text.replaceAll("-", "").split('').reversed.toList();
       if (accountTextList.length > 1) {
