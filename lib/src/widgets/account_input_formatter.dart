@@ -63,7 +63,7 @@ class AccountInputFormatter extends TextInputFormatter {
       }
 
       if (bankCode == 237) {
-        accountTextList.insert(5, ".");
+        accountTextList.insert(4, ".");
       } else if (bankCode == 104) {
         if (accountType == AccountType.checking) {
           accountTextList.addAll([" ", " ", "1", "0", "0"]);

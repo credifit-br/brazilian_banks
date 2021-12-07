@@ -42,7 +42,7 @@ void main() {
       expect(response.digit, "7");
     });
 
-    test('Bradesco invalid digit account', () {
+    test('Unsupported bank', () {
       const validBranchWithDigit = '1425-8';
       final response = BankBranchValidationService().validateBranchNumber(
         bankBranchModel:
