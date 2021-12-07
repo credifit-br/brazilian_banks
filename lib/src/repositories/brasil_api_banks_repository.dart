@@ -5,9 +5,6 @@ import 'package:http/http.dart' as http;
 
 /// @repository Implementation for Brasil Api Banks repository
 class BrasilApiBanksRepository implements IBrasilApiBanksRepository {
-  /// @var List of Brazilian [banks]
-  static List<BrasilApiBanks> banks = [];
-
   @override
   Future<List<BrasilApiBanks>> loadBanks() async {
     const baseApiUrl = "https://brasilapi.com.br/api";

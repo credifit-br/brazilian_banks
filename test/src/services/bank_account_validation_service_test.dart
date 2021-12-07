@@ -4,19 +4,6 @@ import 'package:brazilian_banks/src/services/bank_account_validation_service.dar
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
-  group('brazilian bank list', () {
-    test('an instance of BrasilApiBanksModel is returned', () {
-      final brasilApiBanksModel =
-          BrasilApiBanks(code: 0, fullName: '', ispb: '', name: '');
-      expect(brasilApiBanksModel, isA<BrasilApiBanks>());
-    });
-    test('getBanks returns list of brazilian banks', () async {
-      final banks = await BrasilApiBanks.getBanks();
-      expect(banks.length, greaterThan(0));
-      expect(banks[0].name, 'BCO DO BRASIL S.A.');
-    });
-  });
-
   group('bank account validation', () {
     test('Banco do Brasil valid digit account', () {
       const validAccountWithDigit = '210169-6';
