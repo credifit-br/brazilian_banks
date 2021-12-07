@@ -1,68 +1,176 @@
-// ignore_for_file: public_member_api_docs
-
 import 'package:brazilian_banks/src/models/bank_account_model.dart';
 import 'package:brazilian_banks/src/services/bank_account_validation_service.dart';
 import 'package:brazilian_banks/src/widgets/account_input_formatter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+/// widget to help account validation
 class BankAccountTextFormField extends StatelessWidget {
+  /// @var [bankCode] required for validation of some banks
   final int bankCode;
+
+  /// @var [branchNumber] required for validation of some banks
   final String branchNumber;
+
+  /// @var [accountType] required for validation of some banks
   final AccountType accountType;
+
+  /// @var [invalidInputsMenssage] custom error message when account
+  /// number is null or empty
   final String invalidInputsMenssage;
+
+  /// @var [incorrectAccountDigitMenssage] custom error message when account
+  /// number is not valid
   final String incorrectAccountDigitMenssage;
 
+  /// TextFormField parameter
   final TextEditingController controller;
+
+  /// TextFormField parameter
   final String? initialValue;
+
+  /// TextFormField parameter
   final FocusNode? focusNode;
+
+  /// TextFormField parameter
   final InputDecoration? decoration;
+
+  /// TextFormField parameter
   final TextInputType? keyboardType;
+
+  /// TextFormField parameter
   final TextCapitalization textCapitalization;
+
+  /// TextFormField parameter
   final TextInputAction? textInputAction;
+
+  /// TextFormField parameter
   final TextStyle? style;
+
+  /// TextFormField parameter
   final StrutStyle? strutStyle;
+
+  /// TextFormField parameter
   final TextDirection? textDirection;
+
+  /// TextFormField parameter
   final TextAlign textAlign;
+
+  /// TextFormField parameter
   final TextAlignVertical? textAlignVertical;
+
+  /// TextFormField parameter
   final bool autofocus;
+
+  /// TextFormField parameter
   final bool readOnly;
+
+  /// TextFormField parameter
   final ToolbarOptions? toolbarOptions;
+
+  /// TextFormField parameter
   final bool? showCursor;
+
+  /// TextFormField parameter
   final String obscuringCharacter;
+
+  /// TextFormField parameter
   final bool obscureText;
+
+  /// TextFormField parameter
   final bool autocorrect;
+
+  /// TextFormField parameter
   final SmartDashesType? smartDashesType;
+
+  /// TextFormField parameter
   final SmartQuotesType? smartQuotesType;
+
+  /// TextFormField parameter
   final bool enableSuggestions;
+
+  /// TextFormField parameter
   final MaxLengthEnforcement? maxLengthEnforcement;
+
+  /// TextFormField parameter
   final int? maxLines;
+
+  /// TextFormField parameter
   final int? minLines;
+
+  /// TextFormField parameter
   final bool expands;
+
+  /// TextFormField parameter
   final int? maxLength;
+
+  /// TextFormField parameter
   final ValueChanged<String>? onChanged;
+
+  /// TextFormField parameter
   final GestureTapCallback? onTap;
+
+  /// TextFormField parameter
   final VoidCallback? onEditingComplete;
+
+  /// TextFormField parameter
   final ValueChanged<String>? onFieldSubmitted;
+
+  /// TextFormField parameter
   final FormFieldSetter<String>? onSaved;
+
+  /// TextFormField parameter
   final FormFieldValidator<String>? validator;
+
+  /// TextFormField parameter
   final bool? enabled;
+
+  /// TextFormField parameter
   final double cursorWidth;
+
+  /// TextFormField parameter
   final double? cursorHeight;
+
+  /// TextFormField parameter
   final Radius? cursorRadius;
+
+  /// TextFormField parameter
   final Color? cursorColor;
+
+  /// TextFormField parameter
   final Brightness? keyboardAppearance;
+
+  /// TextFormField parameter
   final EdgeInsets scrollPadding;
+
+  /// TextFormField parameter
   final bool enableInteractiveSelection;
+
+  /// TextFormField parameter
   final TextSelectionControls? selectionControls;
+
+  /// TextFormField parameter
   final InputCounterWidgetBuilder? buildCounter;
+
+  /// TextFormField parameter
   final ScrollPhysics? scrollPhysics;
+
+  /// TextFormField parameter
   final Iterable<String>? autofillHints;
+
+  /// TextFormField parameter
   final AutovalidateMode? autovalidateMode;
+
+  /// TextFormField parameter
   final ScrollController? scrollController;
+
+  /// TextFormField parameter
   final String? restorationId;
+
+  /// TextFormField parameter
   final bool enableIMEPersonalizedLearning;
 
+  /// @construct [BankAccountTextFormField]
   BankAccountTextFormField({
     required this.controller,
     required this.bankCode,
@@ -182,12 +290,6 @@ class BankAccountTextFormField extends StatelessWidget {
 
   String? _validateAccountNumber(String? text) {
     if (text == null || text.isEmpty) {
-      return invalidInputsMenssage;
-    } else if (bankCode == 001 &&
-        text.contains(RegExp('[A-W, Y-Z, a-w, y-z]'))) {
-      return invalidInputsMenssage;
-    } else if (bankCode == 237 &&
-        text.contains(RegExp('[A-O, Q-Z, a-o, q-z]'))) {
       return invalidInputsMenssage;
     }
     final response = BankAccountValidationService().validateAccountNumber(
