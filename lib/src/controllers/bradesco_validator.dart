@@ -15,6 +15,7 @@ BankAccountValidation bradescoValidator(BankAccountModel bankAccountModel) {
 
   final _account = bankAccountModel.accountNumberWithDigit
       .replaceAll("-", "")
+      .replaceAll(".", "")
       .splitByLength(1);
   final _accountNumber = _account[0].padLeft(_accountLen, '0');
   final _numbers = _accountNumber.split("");

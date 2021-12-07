@@ -22,7 +22,10 @@ BankAccountValidation cefValidator(BankAccountModel bankAccountModel) {
 
   final _account = bankAccountModel.accountNumberWithDigit
       .replaceAll("-", "")
+      .replaceAll("001  ", "")
+      .replaceAll("013  ", "")
       .splitByLength(1);
+
   final _accountPrefix =
       bankAccountModel.accountType == AccountType.checking ? '001' : '013';
   final _accountNumber = _accountPrefix + _account[0].padLeft(_accountLen, '0');
