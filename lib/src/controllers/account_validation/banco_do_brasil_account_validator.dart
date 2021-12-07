@@ -6,24 +6,27 @@ extension on String {
       [substring(0, length - _length), substring(length - _length)];
 }
 
-const _accountLen = 7;
+const _accountLen = 8;
 
-/// Bradesco - 237
+/// Banco do Brasil - 001
 /// @param accountNumberWithDigit: can be in format "#-0" or "#0"
-BankAccountValidation bradescoValidator(BankAccountModel bankAccountModel) {
+BankAccountValidation bancoDoBrasilAccountValidator(
+  BankAccountModel bankAccountModel,
+) {
   final _bankAccountValidation = BankAccountValidation();
 
   final _account = bankAccountModel.accountNumberWithDigit
       .replaceAll("-", "")
-      .replaceAll(".", "")
       .splitByLength(1);
   final _accountNumber = _account[0].padLeft(_accountLen, '0');
   final _numbers = _accountNumber.split("");
 
   var sumSequence = 0;
+  var sequence = 0;
 
   for (var i = 0; i < _numbers.length; i++) {
-    sumSequence += _multiplyAccordingWeight(int.parse(_numbers[i]), i);
+    sequence = 9 - i;
+    sumSequence += int.parse(_numbers[i]) * sequence;
   }
 
   final digit = _module(sumSequence);
@@ -36,17 +39,12 @@ BankAccountValidation bradescoValidator(BankAccountModel bankAccountModel) {
 }
 
 String _module(int sumSequence) {
-  final module = sumSequence % 11;
-  if (module == 0) {
+  final result = 11 - (sumSequence % 11);
+  if (result == 10) {
+    return "X";
+  }
+  if (result == 11) {
     return "0";
   }
-  if (module == 1) {
-    return "P";
-  }
-  return (11 - module).toString();
-}
-
-int _multiplyAccordingWeight(int number, int i) {
-  final weight = [2, 7, 6, 5, 4, 3, 2];
-  return number * weight[i];
+  return result.toString();
 }

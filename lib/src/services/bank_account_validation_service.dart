@@ -1,7 +1,7 @@
-import 'package:brazilian_banks/src/controllers/account_validation/banco_do_brasil_validator.dart';
-import 'package:brazilian_banks/src/controllers/account_validation/bradesco_validator.dart';
-import 'package:brazilian_banks/src/controllers/account_validation/cef_validator.dart';
-import 'package:brazilian_banks/src/controllers/account_validation/itau_validator.dart';
+import 'package:brazilian_banks/src/controllers/account_validation/banco_do_brasil_account_validator.dart';
+import 'package:brazilian_banks/src/controllers/account_validation/bradesco_account_validator.dart';
+import 'package:brazilian_banks/src/controllers/account_validation/cef_account_validator.dart';
+import 'package:brazilian_banks/src/controllers/account_validation/itau_account_validator.dart';
 import 'package:brazilian_banks/src/models/bank_account_model.dart';
 import 'package:brazilian_banks/src/models/bank_account_validation_model.dart';
 import 'package:brazilian_banks/src/services/interfaces/bank_account_validation_service_interface.dart';
@@ -15,13 +15,13 @@ class BankAccountValidationService extends IBankAccountValidationService {
     final _bankAccountValidation = BankAccountValidation();
     switch (bankAccountModel.bankCode) {
       case 001:
-        return bancoDoBrasilValidator(bankAccountModel);
+        return bancoDoBrasilAccountValidator(bankAccountModel);
       case 237:
-        return bradescoValidator(bankAccountModel);
+        return bradescoAccountValidator(bankAccountModel);
       case 104:
-        return cefValidator(bankAccountModel);
+        return cefAccountValidator(bankAccountModel);
       case 341:
-        return itauValidator(bankAccountModel);
+        return itauAccountValidator(bankAccountModel);
       default:
         _bankAccountValidation.errorMessage = "banco não suportado";
         return _bankAccountValidation;

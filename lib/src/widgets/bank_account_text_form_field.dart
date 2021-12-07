@@ -181,8 +181,6 @@ class BankAccountTextFormField extends StatelessWidget {
   }
 
   String? _validateAccountNumber(String? text) {
-    //if(bankCode == 001 && text.)
-
     if (bankCode == 001 && text!.contains(RegExp('[A-W, Y-Z, a-w, y-z]'))) {
       return invalidInputsMenssage;
     } else if (bankCode == 237 &&

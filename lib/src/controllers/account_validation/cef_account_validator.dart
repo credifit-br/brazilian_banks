@@ -17,7 +17,7 @@ const _multipliers = [8, 7, 6, 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2];
 /// @docs    Account: 00100000448-6
 /// @docs      Os três primeiros dígitos da conta são o tipo da conta
 /// @docs      (001 para Conta Corrente e 013 para Poupança)
-BankAccountValidation cefValidator(BankAccountModel bankAccountModel) {
+BankAccountValidation cefAccountValidator(BankAccountModel bankAccountModel) {
   final _bankAccountValidation = BankAccountValidation();
 
   final _account = bankAccountModel.accountNumberWithDigit

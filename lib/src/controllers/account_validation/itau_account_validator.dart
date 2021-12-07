@@ -10,7 +10,7 @@ const _accountLen = 5;
 
 /// Itau - 341
 /// @param accountNumberWithDigit: can be in format "#-0" or "#0"
-BankAccountValidation itauValidator(BankAccountModel bankAccountModel) {
+BankAccountValidation itauAccountValidator(BankAccountModel bankAccountModel) {
   final _bankAccountValidation = BankAccountValidation();
 
   final _account = bankAccountModel.accountNumberWithDigit
