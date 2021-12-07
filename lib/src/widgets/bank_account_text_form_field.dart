@@ -181,22 +181,27 @@ class BankAccountTextFormField extends StatelessWidget {
   }
 
   String? _validateAccountNumber(String? text) {
-    if (bankCode == 001 && text!.contains(RegExp('[A-W, Y-Z, a-w, y-z]'))) {
+    if (text == null || text.isEmpty) {
+      return invalidInputsMenssage;
+    } else if (bankCode == 001 &&
+        text.contains(RegExp('[A-W, Y-Z, a-w, y-z]'))) {
       return invalidInputsMenssage;
     } else if (bankCode == 237 &&
-        text!.contains(RegExp('[A-O, Q-Z, a-o, q-z]'))) {
+        text.contains(RegExp('[A-O, Q-Z, a-o, q-z]'))) {
       return invalidInputsMenssage;
     }
     final response = BankAccountValidationService().validateAccountNumber(
       bankAccountModel: BankAccountModel(
-        accountNumberWithDigit: text ?? "",
+        accountNumberWithDigit: text,
         accountType: accountType,
         bankCode: bankCode,
         branchNumber: branchNumber,
       ),
     );
 
-    return response.isValid! ? null : _invalidValueMessage(response.digit);
+    if (response.isValid != null) {
+      return response.isValid! ? null : _invalidValueMessage(response.digit);
+    }
   }
 
   // ignore: avoid_field_initializers_in_const_classes
