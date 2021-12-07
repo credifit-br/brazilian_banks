@@ -13,9 +13,9 @@ class BankBranchTextFormField extends StatelessWidget {
   /// number is null or empty
   final String invalidInputsMenssage;
 
-  /// @var [incorrectAccountDigitMenssage] custom error message when branch
+  /// @var [incorrectBranchDigitMenssage] custom error message when branch
   /// number is not valid
-  final String incorrectAccountDigitMenssage;
+  final String incorrectBranchDigitMenssage;
 
   /// TextFormField parameter
   final TextEditingController controller;
@@ -168,7 +168,7 @@ class BankBranchTextFormField extends StatelessWidget {
   BankBranchTextFormField({
     required this.controller,
     required this.bankCode,
-    required this.incorrectAccountDigitMenssage,
+    required this.incorrectBranchDigitMenssage,
     required this.invalidInputsMenssage,
     Key? key,
     this.focusNode,
@@ -296,5 +296,5 @@ class BankBranchTextFormField extends StatelessWidget {
   final _replaceArgRegex = RegExp('{}');
 
   String _invalidValueMessage(String? digit) =>
-      incorrectAccountDigitMenssage.replaceFirst(_replaceArgRegex, digit ?? "");
+      incorrectBranchDigitMenssage.replaceFirst(_replaceArgRegex, digit ?? "");
 }

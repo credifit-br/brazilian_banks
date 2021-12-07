@@ -45,7 +45,7 @@ class _TextFormsPageState extends State<BranchAccountTextFormFields> {
                   bankCode: int.tryParse(_bankTextController.text) ?? 000,
                   controller: _branchTextController,
                   invalidInputsMenssage: 'Informe valores válidos',
-                  incorrectAccountDigitMenssage:
+                  incorrectBranchDigitMenssage:
                       'Digito da conta errado, não seria {}?',
                 ),
               ),
