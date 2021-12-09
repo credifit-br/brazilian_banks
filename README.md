@@ -26,7 +26,7 @@ Banks currently supported:
 Example:
 
 ```dart
-var response = BankAccountValidation.validateAccountNumber(
+var response = BankAccountValidationService().validateAccountNumber(
     bankAccountModel: BankAccountModel(
         bankCode: 341,
         branchNumber: '2545',
@@ -43,6 +43,65 @@ if (response.errorMessage == null) {
 } else {
     print(response.errorMessage);
 }
+```
+
+### Validate Brazilian Bank Branch Digit
+
+Banks currently supported:
+
+- Banco do Brasil (001)
+- Bradesco (237)
+
+```dart
+final response = BankBranchValidationService().validateBranchNumber(
+        bankBranchModel: BankBranchModel(
+          bankCode: bankCode,
+          branchNumber: text,
+        ),
+      ); 
+```
+
+### Use formatters for accounts and branchs
+
+Banks currently supported:
+
+- Banco do Brasil (001)
+- Bradesco (237)
+- CEF - Caixa Econômica Federal (104)
+- Itau (341)
+
+```dart
+
+ inputFormatters: [
+        AccountInputFormatter(bankCode: bankCode, accountType: accountType)
+      ],
+
+inputFormatters: [BranchInputFormatter(bankCode: bankCode)],
+
+```
+
+### Or use widgets that already have validations and formatters
+
+```dart
+BankBranchTextFormField(
+                  decoration: const InputDecoration(label: Text("Agência")),
+                  bankCode: int.tryParse(_bankTextController.text) ?? 000,
+                  controller: _branchTextController,
+                  invalidInputsMenssage: 'Informe valores válidos',
+                  incorrectBranchDigitMenssage:
+                      'Dígito da agência errado, não seria {}?',
+                ),
+                
+BankAccountTextFormField(
+                  decoration: const InputDecoration(label: Text("Conta")),
+                  bankCode: int.tryParse(_bankTextController.text) ?? 000,
+                  accountType: AccountType.checking,
+                  controller: _accountTextController,
+                  branchNumber: _branchTextController.text,
+                  invalidInputsMenssage: 'Informe valores válidos',
+                  incorrectAccountDigitMenssage:
+                      'Dígito da conta errado, não seria {}?',
+                ),
 ```
 
 ## Contribute

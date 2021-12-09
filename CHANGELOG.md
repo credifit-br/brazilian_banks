@@ -1,3 +1,10 @@
+# Release Changelog
+
+## [0.4.0-dev] - 2021-12-08
+
+* Add: widget for the validation of branch and account
+* Add: input formatter for branch and account
+
 ## [0.3.3] - 2021-05-13
 
 * Fix: return of CEF account without account type prefix

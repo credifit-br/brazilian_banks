@@ -1,9 +1,10 @@
+import 'package:example/pages/branch_account_text_form_fields.dart';
 import 'package:flutter/material.dart';
 
 import 'banks_page.dart';
 
 class HomePage extends StatefulWidget {
-  HomePage({Key key, this.title}) : super(key: key);
+  const HomePage({Key? key, required this.title}) : super(key: key);
 
   final String title;
 
@@ -20,19 +21,34 @@ class _HomePageState extends State<HomePage> {
       ),
       body: Center(
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            TextButton(
+            ElevatedButton(
               onPressed: () {
-                Navigator.push(context, MaterialPageRoute(builder: (_) => BanksPage()));
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (_) => const BanksPage()));
               },
-              child: Text(
+              child: const Text(
                 'Lista de Bancos Brasileiros',
                 style: TextStyle(
                   color: Colors.white,
-                  backgroundColor: Colors.orange[800],
                 ),
               ),
-            )
+            ),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (_) => const BranchAccountTextFormFields()));
+              },
+              child: const Text(
+                'TextFormsPage',
+                style: TextStyle(
+                  color: Colors.white,
+                ),
+              ),
+            ),
           ],
         ),
       ),

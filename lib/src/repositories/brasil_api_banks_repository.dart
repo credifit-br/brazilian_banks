@@ -1,17 +1,14 @@
 import 'dart:convert';
+import 'package:brazilian_banks/src/models/brasil_api_banks_model.dart';
+import 'package:brazilian_banks/src/repositories/interfaces/brasil_api_banks_repository_interface.dart';
 import 'package:http/http.dart' as http;
 
-import '../models/brasil_api_banks_model.dart';
-import 'interfaces/brasil_api_banks_repository_interface.dart';
-
-/// Implementation for Brasil Api Banks repository
+/// @repository Implementation for Brasil Api Banks repository
 class BrasilApiBanksRepository implements IBrasilApiBanksRepository {
-  static var banks = <BrasilApiBanks>[];
-
   @override
-  loadBanks() async {
-    final baseApiUrl = "https://brasilapi.com.br/api";
-    final api = "/banks/v1";
+  Future<List<BrasilApiBanks>> loadBanks() async {
+    const baseApiUrl = "https://brasilapi.com.br/api";
+    const api = "/banks/v1";
     final _uri = Uri.parse("$baseApiUrl$api");
     http.Response _response;
 
@@ -19,10 +16,11 @@ class BrasilApiBanksRepository implements IBrasilApiBanksRepository {
 
     switch (_response.statusCode) {
       case 200:
-        var banks = <BrasilApiBanks>[];
-        List parsedJson = json.decode(_response.body);
+        final banks = <BrasilApiBanks>[];
+        final List<dynamic> parsedJson =
+            json.decode(_response.body) as List<dynamic>;
         for (var i = 0; i < parsedJson.length; i++) {
-          banks.add(BrasilApiBanks.fromJson(parsedJson[i]));
+          banks.add(BrasilApiBanks.fromJson(parsedJson[i] as Map));
         }
         return banks;
       default:

@@ -1,13 +1,13 @@
-import 'package:brazilian_banks/src/models/bank_account_model.dart';
-import 'package:flutter_test/flutter_test.dart';
-
 import 'package:brazilian_banks/brazilian_banks.dart';
+import 'package:brazilian_banks/src/models/bank_account_model.dart';
+import 'package:brazilian_banks/src/services/bank_account_validation_service.dart';
+import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   group('cef account validation', () {
     test('CEF valid digit account', () {
-      final validAccountWithDigit = '00000448-6';
-      final response = BankAccountValidation.validateAccountNumber(
+      const validAccountWithDigit = '00000448-6';
+      final response = BankAccountValidationService().validateAccountNumber(
         bankAccountModel: BankAccountModel(
           accountNumberWithDigit: validAccountWithDigit,
           accountType: AccountType.checking,
@@ -20,8 +20,8 @@ void main() {
       expect(response.digit, '6');
     });
     test('CEF invalid digit account', () {
-      final invalidAccountWithDigit = '00000448-5';
-      final response = BankAccountValidation.validateAccountNumber(
+      const invalidAccountWithDigit = '00000448-5';
+      final response = BankAccountValidationService().validateAccountNumber(
         bankAccountModel: BankAccountModel(
           accountNumberWithDigit: invalidAccountWithDigit,
           accountType: AccountType.checking,

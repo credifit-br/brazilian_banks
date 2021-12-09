@@ -1,23 +1,22 @@
 import 'package:brazilian_banks/src/models/bank_account_model.dart';
-
-import '../../brazilian_banks.dart';
+import 'package:brazilian_banks/src/models/bank_account_validation_model.dart';
 
 extension on String {
   List<String> splitByLength(int _length) =>
       [substring(0, length - _length), substring(length - _length)];
 }
 
-const ACCOUNT_LEN = 5;
+const _accountLen = 5;
 
 /// Itau - 341
 /// @param accountNumberWithDigit: can be in format "#-0" or "#0"
-BankAccountValidation itauValidator(BankAccountModel bankAccountModel) {
-  var _bankAccountValidation = BankAccountValidation();
+BankAccountValidation itauAccountValidator(BankAccountModel bankAccountModel) {
+  final _bankAccountValidation = BankAccountValidation();
 
   final _account = bankAccountModel.accountNumberWithDigit
       .replaceAll("-", "")
       .splitByLength(1);
-  final _accountNumber = _account[0].padLeft(ACCOUNT_LEN, '0');
+  final _accountNumber = _account[0].padLeft(_accountLen, '0');
   final _branchAndAcccountNumber =
       bankAccountModel.branchNumber + _accountNumber;
   final _numbers = _branchAndAcccountNumber.split("");
@@ -26,12 +25,12 @@ BankAccountValidation itauValidator(BankAccountModel bankAccountModel) {
   var sequence = 0;
 
   for (var i = 0; i < _numbers.length; i++) {
-    sequence = multiplyAccordingParity(int.parse(_numbers[i]), i);
-    sequence = adjustAccordingLength(sequence);
+    sequence = _multiplyAccordingParity(int.parse(_numbers[i]), i);
+    sequence = _adjustAccordingLength(sequence);
     sumSequence += sequence;
   }
 
-  var digit = module(sumSequence);
+  final digit = _module(sumSequence);
 
   _bankAccountValidation.isValid = digit == _account[1];
   _bankAccountValidation.digit = digit;
@@ -40,7 +39,7 @@ BankAccountValidation itauValidator(BankAccountModel bankAccountModel) {
   return _bankAccountValidation;
 }
 
-String module(sumSequence) {
+String _module(int sumSequence) {
   final module = sumSequence % 10;
   if (module == 0) {
     return "0";
@@ -48,17 +47,18 @@ String module(sumSequence) {
   return (10 - module).toString();
 }
 
-int multiplyAccordingParity(number, index) {
+int _multiplyAccordingParity(int number, int index) {
   return number * (index % 2 == 0 ? 2 : 1);
 }
 
-int adjustAccordingLength(sequence) {
-  if (sequence > 9) {
-    final numbers = sequence.toString().split("");
-    sequence = 0;
+int _adjustAccordingLength(int sequence) {
+  int _sequence = sequence;
+  if (_sequence > 9) {
+    final numbers = _sequence.toString().split("");
+    _sequence = 0;
     for (var i = 0; i < numbers.length; i++) {
-      sequence += int.parse(numbers[i]);
+      _sequence += int.parse(numbers[i]);
     }
   }
-  return sequence;
+  return _sequence;
 }
