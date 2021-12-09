@@ -46,7 +46,7 @@ class _TextFormsPageState extends State<BranchAccountTextFormFields> {
                   controller: _branchTextController,
                   invalidInputsMenssage: 'Informe valores válidos',
                   incorrectBranchDigitMenssage:
-                      'Digito da conta errado, não seria {}?',
+                      'Dígito da agência errado, não seria {}?',
                 ),
               ),
               Padding(
@@ -59,7 +59,7 @@ class _TextFormsPageState extends State<BranchAccountTextFormFields> {
                   branchNumber: _branchTextController.text,
                   invalidInputsMenssage: 'Informe valores válidos',
                   incorrectAccountDigitMenssage:
-                      'Digito da conta errado, não seria {}?',
+                      'Dígito da conta errado, não seria {}?',
                 ),
               ),
               ElevatedButton(

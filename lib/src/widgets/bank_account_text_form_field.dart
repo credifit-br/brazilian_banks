@@ -1,6 +1,6 @@
 import 'package:brazilian_banks/src/models/bank_account_model.dart';
 import 'package:brazilian_banks/src/services/bank_account_validation_service.dart';
-import 'package:brazilian_banks/src/widgets/account_input_formatter.dart';
+import 'package:brazilian_banks/src/utils/account_input_formatter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 

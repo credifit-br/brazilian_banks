@@ -96,6 +96,8 @@ class AccountInputFormatter extends TextInputFormatter {
     }
   }
 
+  /// In other parts of the code it has the account sizes, however the sizes
+  /// provided by [_bankAccountLength] take into account the account digit
   int get _bankAccountLength {
     switch (bankCode) {
       case 001:
