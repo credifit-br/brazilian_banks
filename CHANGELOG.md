@@ -1,5 +1,9 @@
 # Release Changelog
 
+## [0.4.0-dev-0.0.1] - 2021-12-10
+
+* Fix: input formatter issues
+
 ## [0.4.0-dev] - 2021-12-08
 
 * Add: widget for the validation of branch and account
