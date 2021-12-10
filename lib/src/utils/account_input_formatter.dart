@@ -79,9 +79,6 @@ class AccountInputFormatter extends TextInputFormatter {
         ),
       );
     } else {
-      if (newValue.text.contains(RegExp('[A-Z, a-z]'))) {
-        return oldValue;
-      }
       final accountTextList =
           newValue.text.replaceAll("-", "").split('').reversed.toList();
       if (accountTextList.length > 1) {
