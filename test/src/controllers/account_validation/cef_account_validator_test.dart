@@ -1,6 +1,4 @@
 import 'package:brazilian_banks/brazilian_banks.dart';
-import 'package:brazilian_banks/src/models/bank_account_model.dart';
-import 'package:brazilian_banks/src/services/bank_account_validation_service.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
