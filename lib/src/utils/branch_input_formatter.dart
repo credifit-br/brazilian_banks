@@ -58,8 +58,33 @@ class BranchInputFormatter extends TextInputFormatter {
         ),
       );
     } else {
-      if (newValue.text.contains(RegExp('[A-Z, a-z]'))) {
-        return oldValue;
+      if (_bankBranchLength != 0) {
+        final List<String> accountTextList = newValue.text
+            .replaceAll(" ", "")
+            .replaceAll("-", "")
+            .replaceAll(".", "")
+            .split('')
+            .reversed
+            .toList();
+
+        if (newValue.text.length > 1) {
+          accountTextList.removeLast();
+        }
+
+        for (var i = accountTextList.length; i < _bankBranchLength; i++) {
+          accountTextList.add('0');
+        }
+
+        if (newValue.text.contains(RegExp('[A-Z, a-z]'))) {
+          return oldValue;
+        }
+
+        return newValue.copyWith(
+          text: accountTextList.reversed.join(),
+          selection: TextSelection.fromPosition(
+            TextPosition(offset: accountTextList.length),
+          ),
+        );
       }
       return newValue;
     }
@@ -68,6 +93,9 @@ class BranchInputFormatter extends TextInputFormatter {
   int get _bankBranchLength {
     if (bankCode == 237 || bankCode == 001) {
       return 5;
+    }
+    if (bankCode == 104 || bankCode == 341) {
+      return 4;
     }
     return 0;
   }
