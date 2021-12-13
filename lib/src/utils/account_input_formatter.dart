@@ -19,10 +19,7 @@ class AccountInputFormatter extends TextInputFormatter {
   ) {
     // ignore: parameter_assignments
     newValue = newValue.copyWith(
-      text: newValue.text.replaceAll(
-        RegExp(r'[!@#$%&*\(\)\-\_\\\=\+\[\]\{\}\/\?\:\;\>\<\,\.\°\º\ª]'),
-        "",
-      ),
+      text: newValue.text.replaceAll(RegExp(r'[^A-Z,a-z,0-9]'), ""),
     );
     if (_bankAccountLength != 0) {
       if (bankCode == 001) {
