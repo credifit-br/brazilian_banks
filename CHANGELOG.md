@@ -1,9 +1,12 @@
 # Release Changelog
 
+## [0.4.0-dev-0.0.3] - 2021-12-13
+
+* Fix: input formatter issues
+
 ## [0.4.0-dev-0.0.2] - 2021-12-13
 
 * Fix: do not allow typing letters when the banks are Itaú or CEF
-* Fix: input formatter issues
 * Fix: regular expression to disallow anything that doesn't have a letter or number
 
 ## [0.4.0-dev-0.0.1] - 2021-12-10
