@@ -3,6 +3,7 @@
 ## [0.4.0-dev-0.0.2] - 2021-12-10
 
 * Fix: do not allow typing letters when the banks are Itaú or CEF
+* Fix: regular expression to disallow anything that doesn't have a letter or number
 
 ## [0.4.0-dev-0.0.1] - 2021-12-10
 
