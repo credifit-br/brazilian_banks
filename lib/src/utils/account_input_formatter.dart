@@ -33,6 +33,10 @@ class AccountInputFormatter extends TextInputFormatter {
         if (newValue.text.contains(RegExp('[A-O, Q-Z, a-o, q-z]'))) {
           return oldValue;
         }
+      } else if (bankCode == 104 || bankCode == 341) {
+        if (newValue.text.contains(RegExp('[A-Z, a-z]'))) {
+          return oldValue;
+        }
       }
       if (newValue.text.length > 1) {
         // ignore: parameter_assignments
