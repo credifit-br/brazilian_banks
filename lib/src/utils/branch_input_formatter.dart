@@ -30,10 +30,14 @@ class BranchInputFormatter extends TextInputFormatter {
       }
 
       if (newValue.text.length > 1) {
-        // ignore: parameter_assignments
-        newValue = newValue.copyWith(
-          text: newValue.text.replaceFirst(RegExp('[0-9, A-Z, a-z]'), ""),
-        );
+        final formtedOldValue =
+            oldValue.text.replaceAll(RegExp(r'[^A-Z,a-z,0-9]'), "");
+        if (newValue.text.length > formtedOldValue.length) {
+          // ignore: parameter_assignments
+          newValue = newValue.copyWith(
+            text: newValue.text.replaceFirst(RegExp('[0-9, A-Z, a-z]'), ""),
+          );
+        }
       }
       final List<String> accountTextList = newValue.text
           .replaceAll(" ", "")
