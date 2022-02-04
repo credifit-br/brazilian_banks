@@ -290,6 +290,7 @@ class BankBranchTextFormField extends StatelessWidget {
       );
       return response.isValid! ? null : _invalidValueMessage(response.digit);
     }
+    return null;
   }
 
   // ignore: avoid_field_initializers_in_const_classes
