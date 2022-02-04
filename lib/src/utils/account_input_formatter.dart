@@ -22,12 +22,18 @@ class AccountInputFormatter extends TextInputFormatter {
       text: newValue.text.replaceAll(RegExp(r'[^A-Z,a-z,0-9]'), ""),
     );
     if (_bankAccountLength != 0) {
+      final digit = newValue.text.split("").last;
+      final accountList = newValue.text.split("");
+      accountList.removeLast();
+      final account = accountList.join();
       if (bankCode == 001) {
-        if (newValue.text.contains(RegExp('[A-W, Y-Z, a-w, y-z]'))) {
+        if (digit.contains(RegExp('[A-W, Y-Z, a-w, y-z]')) ||
+            account.contains(RegExp('[A-Z, a-z]'))) {
           return oldValue;
         }
       } else if (bankCode == 237) {
-        if (newValue.text.contains(RegExp('[A-O, Q-Z, a-o, q-z]'))) {
+        if (digit.contains(RegExp('[A-O, Q-Z, a-o, q-z]')) ||
+            account.contains(RegExp('[A-Z, a-z]'))) {
           return oldValue;
         }
       } else if (bankCode == 104 || bankCode == 341) {
