@@ -1,10 +1,10 @@
 name: brazilian_banks
 description: Get a list of brazilian bank codes/names, and account/digit validation (Retorna a lista de bancos brasileiros, com seus nomes e códigos, e faz validação de dígito de contas)
-version: 0.4.1
+version: 0.4.2
 homepage: https://github.com/credifit-br/brazilian_banks
 
 environment:
-  sdk: ">=2.16.0 <3.0.0"
+  sdk: ">=2.12.0 <3.0.0"
   flutter: ">=1.17.0"
 
 dependencies:
