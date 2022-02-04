@@ -1,5 +1,10 @@
 # Release Changelog
 
+## [0.4.1]
+
+* Update: Flutter 2.10.0
+* Fix: Fill in the account field with X or P only in field referring to digit
+
 ## [0.4.0]
 
 * Add: widget for the validation of branch and account
