@@ -42,7 +42,7 @@ void main() {
     });
 
     test('Bradesco invalid digit account', () {
-      const invalidAccountWithDigit = '3013570';
+      const invalidAccountWithDigit = '301357';
       final response = BankAccountValidationService().validateAccountNumber(
         bankAccountModel: BankAccountModel(
           bankCode: 237,
@@ -52,7 +52,35 @@ void main() {
         ),
       );
       expect(response.isValid, false);
-      expect(response.digit, "P");
+      expect(response.digit, "3");
+    });
+
+    test('Bradesco invalid digit account', () {
+      const invalidAccountWithDigit = '0291011P';
+      final response = BankAccountValidationService().validateAccountNumber(
+        bankAccountModel: BankAccountModel(
+          bankCode: 237,
+          branchNumber: '',
+          accountNumberWithDigit: invalidAccountWithDigit,
+          accountType: AccountType.checking,
+        ),
+      );
+      expect(response.isValid, false);
+      expect(response.digit, "0");
+    });
+
+    test('Bradesco invalid digit account', () {
+      const invalidAccountWithDigit = '02910110';
+      final response = BankAccountValidationService().validateAccountNumber(
+        bankAccountModel: BankAccountModel(
+          bankCode: 237,
+          branchNumber: '',
+          accountNumberWithDigit: invalidAccountWithDigit,
+          accountType: AccountType.checking,
+        ),
+      );
+      expect(response.isValid, true);
+      expect(response.digit, "0");
     });
     test('Itau valid digit account', () {
       const validAccountWithDigit = '02366-1';

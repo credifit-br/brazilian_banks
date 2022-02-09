@@ -40,10 +40,7 @@ BankAccountValidation bancoDoBrasilAccountValidator(
 
 String _module(int sumSequence) {
   final result = 11 - (sumSequence % 11);
-  if (result == 10) {
-    return "X";
-  }
-  if (result == 11) {
+  if (result == 10 || result == 11) {
     return "0";
   }
   return result.toString();

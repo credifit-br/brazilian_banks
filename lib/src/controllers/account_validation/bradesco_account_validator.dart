@@ -39,11 +39,8 @@ BankAccountValidation bradescoAccountValidator(
 
 String _module(int sumSequence) {
   final module = sumSequence % 11;
-  if (module == 0) {
+  if (module == 0 || module == 1) {
     return "0";
-  }
-  if (module == 1) {
-    return "P";
   }
   return (11 - module).toString();
 }
