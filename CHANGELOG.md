@@ -1,5 +1,13 @@
 # Release Changelog
 
+## [0.4.3]
+
+feat: Remove P and X validations for Bradesco and Banco do Brasil
+
+## [0.4.2]
+
+fix: downgrade dart sdk version
+
 ## [0.4.1]
 
 * Update: Flutter 2.10.0
