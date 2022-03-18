@@ -5,11 +5,12 @@ import 'package:flutter_test/flutter_test.dart';
 
 final _formKey = GlobalKey<FormState>();
 
-Widget _bankAccountTextFormFieldTest(
-  int bankCode,
-  String branchNumber, [
+Widget _bankAccountTextFormFieldTest({
+  required int bankCode,
+  required String branchNumber,
+  bool notAllowAccountWithOnlyZeros = false,
   AccountType accountType = AccountType.checking,
-]) {
+}) {
   return MaterialApp(
     home: Scaffold(
       body: Column(
@@ -19,6 +20,7 @@ Widget _bankAccountTextFormFieldTest(
             child: BankAccountTextFormField(
               autovalidateMode: AutovalidateMode.onUserInteraction,
               accountType: accountType,
+              notAllowAccountWithOnlyZeros: notAllowAccountWithOnlyZeros,
               bankCode: bankCode,
               branchNumber: branchNumber,
               controller: TextEditingController(),
@@ -39,7 +41,8 @@ Widget _bankAccountTextFormFieldTest(
 void main() {
   testWidgets('Validate isEmpty text BankAccountTextFormField teste',
       (WidgetTester tester) async {
-    await tester.pumpWidget(_bankAccountTextFormFieldTest(001, '0526-6'));
+    await tester.pumpWidget(
+        _bankAccountTextFormFieldTest(bankCode: 001, branchNumber: '0526-6'));
 
     await tester.pumpAndSettle();
     final accountFieldFinder = find.byType(BankAccountTextFormField);
@@ -57,7 +60,8 @@ void main() {
 
   testWidgets('Banco do Brasil BankAccountTextFormField invalid account teste',
       (WidgetTester tester) async {
-    await tester.pumpWidget(_bankAccountTextFormFieldTest(001, '0526-6'));
+    await tester.pumpWidget(
+        _bankAccountTextFormFieldTest(bankCode: 001, branchNumber: '0526-6'));
 
     await tester.pumpAndSettle();
     final accountFieldFinder = find.byType(BankAccountTextFormField);
@@ -80,7 +84,8 @@ void main() {
 
   testWidgets('Banco do Brasil BankAccountTextFormField teste',
       (WidgetTester tester) async {
-    await tester.pumpWidget(_bankAccountTextFormFieldTest(001, '0526-6'));
+    await tester.pumpWidget(
+        _bankAccountTextFormFieldTest(bankCode: 001, branchNumber: '0526-6'));
 
     await tester.pumpAndSettle();
     final accountFieldFinder = find.byType(BankAccountTextFormField);
@@ -100,7 +105,8 @@ void main() {
 
   testWidgets('Bradesco BankAccountTextFormField teste',
       (WidgetTester tester) async {
-    await tester.pumpWidget(_bankAccountTextFormFieldTest(237, '1425-7'));
+    await tester.pumpWidget(
+        _bankAccountTextFormFieldTest(bankCode: 237, branchNumber: '1425-7'));
 
     await tester.pumpAndSettle();
     final accountFieldFinder = find.byType(BankAccountTextFormField);
@@ -116,7 +122,8 @@ void main() {
 
   testWidgets('CEF BankAccountTextFormField test AccountType.checking',
       (WidgetTester tester) async {
-    await tester.pumpWidget(_bankAccountTextFormFieldTest(104, '2004'));
+    await tester.pumpWidget(
+        _bankAccountTextFormFieldTest(bankCode: 104, branchNumber: '2004'));
 
     await tester.pumpAndSettle();
     final accountFieldFinder = find.byType(BankAccountTextFormField);
@@ -134,9 +141,9 @@ void main() {
       (WidgetTester tester) async {
     await tester.pumpWidget(
       _bankAccountTextFormFieldTest(
-        104,
-        '2004',
-        AccountType.saving,
+        bankCode: 104,
+        branchNumber: '2004',
+        accountType: AccountType.saving,
       ),
     );
 
@@ -156,9 +163,9 @@ void main() {
       (WidgetTester tester) async {
     await tester.pumpWidget(
       _bankAccountTextFormFieldTest(
-        260,
-        '0001',
-        AccountType.saving,
+        bankCode: 260,
+        branchNumber: '0001',
+        accountType: AccountType.saving,
       ),
     );
 
@@ -172,5 +179,109 @@ void main() {
 
     final accountTextFinder = find.text("7487355-8");
     expect(accountTextFinder, findsOneWidget);
+  });
+
+  testWidgets('Not Allow Bradesco account with only zeros',
+      (WidgetTester tester) async {
+    await tester.pumpWidget(_bankAccountTextFormFieldTest(
+        bankCode: 237,
+        branchNumber: '0001',
+        notAllowAccountWithOnlyZeros: true));
+
+    await tester.pumpAndSettle();
+    final accountFieldFinder = find.byType(BankAccountTextFormField);
+    expect(accountFieldFinder, findsOneWidget);
+    await tester.tap(accountFieldFinder);
+    await tester.pumpAndSettle();
+    await tester.enterText(accountFieldFinder, "0000.000-0");
+    await tester.pumpAndSettle();
+
+    final accountTextFinder = find.text("0000.000-0");
+    expect(accountTextFinder, findsOneWidget);
+
+    final buttonFieldFinder = find.byType(ElevatedButton);
+    await tester.tap(buttonFieldFinder);
+    await tester.pumpAndSettle();
+
+    final erroText = find.text("invalidInputsMenssage");
+    expect(erroText, findsOneWidget);
+  });
+
+  testWidgets('Not Allow BB account with only zeros',
+      (WidgetTester tester) async {
+    await tester.pumpWidget(_bankAccountTextFormFieldTest(
+        bankCode: 001,
+        branchNumber: '0526-6',
+        notAllowAccountWithOnlyZeros: true));
+
+    await tester.pumpAndSettle();
+    final accountFieldFinder = find.byType(BankAccountTextFormField);
+    expect(accountFieldFinder, findsOneWidget);
+    await tester.tap(accountFieldFinder);
+    await tester.pumpAndSettle();
+    await tester.enterText(accountFieldFinder, "00000000-0");
+    await tester.pumpAndSettle();
+
+    final accountTextFinder = find.text("00000000-0");
+    expect(accountTextFinder, findsOneWidget);
+
+    final buttonFieldFinder = find.byType(ElevatedButton);
+    await tester.tap(buttonFieldFinder);
+    await tester.pumpAndSettle();
+
+    final erroText = find.text("invalidInputsMenssage");
+    expect(erroText, findsOneWidget);
+  });
+
+  testWidgets('Not Allow BB account with only zeros',
+      (WidgetTester tester) async {
+    await tester.pumpWidget(_bankAccountTextFormFieldTest(
+        bankCode: 341,
+        branchNumber: '0000-0',
+        notAllowAccountWithOnlyZeros: true));
+
+    await tester.pumpAndSettle();
+    final accountFieldFinder = find.byType(BankAccountTextFormField);
+    expect(accountFieldFinder, findsOneWidget);
+    await tester.tap(accountFieldFinder);
+    await tester.pumpAndSettle();
+    await tester.enterText(accountFieldFinder, "00000-0");
+    await tester.pumpAndSettle();
+
+    final accountTextFinder = find.text("00000-0");
+    expect(accountTextFinder, findsOneWidget);
+
+    final buttonFieldFinder = find.byType(ElevatedButton);
+    await tester.tap(buttonFieldFinder);
+    await tester.pumpAndSettle();
+
+    final erroText = find.text("invalidInputsMenssage");
+    expect(erroText, findsOneWidget);
+  });
+
+  testWidgets('Not Allow NuBank account with only zeros',
+      (WidgetTester tester) async {
+    await tester.pumpWidget(_bankAccountTextFormFieldTest(
+        bankCode: 260,
+        branchNumber: '0000-0',
+        notAllowAccountWithOnlyZeros: true));
+
+    await tester.pumpAndSettle();
+    final accountFieldFinder = find.byType(BankAccountTextFormField);
+    expect(accountFieldFinder, findsOneWidget);
+    await tester.tap(accountFieldFinder);
+    await tester.pumpAndSettle();
+    await tester.enterText(accountFieldFinder, "00000-0");
+    await tester.pumpAndSettle();
+
+    final accountTextFinder = find.text("00000-0");
+    expect(accountTextFinder, findsOneWidget);
+
+    final buttonFieldFinder = find.byType(ElevatedButton);
+    await tester.tap(buttonFieldFinder);
+    await tester.pumpAndSettle();
+
+    final erroText = find.text("invalidInputsMenssage");
+    expect(erroText, findsOneWidget);
   });
 }

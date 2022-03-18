@@ -1,5 +1,9 @@
 # Release Changelog
 
+## [0.5.0]
+
+feat: Not allow account and branch with only zeros
+
 ## [0.4.3]
 
 feat: Remove P and X validations for Bradesco and Banco do Brasil

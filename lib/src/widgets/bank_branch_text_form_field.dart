@@ -164,6 +164,9 @@ class BankBranchTextFormField extends StatelessWidget {
   /// TextFormField parameter
   final bool enableIMEPersonalizedLearning;
 
+  /// TextFormField parameter
+  final bool notAllowBranchWithOnlyZeros;
+
   /// @construct [BankBranchTextFormField]
   BankBranchTextFormField({
     required this.controller,
@@ -219,6 +222,7 @@ class BankBranchTextFormField extends StatelessWidget {
     this.autovalidateMode,
     this.scrollController,
     this.restorationId,
+    this.notAllowBranchWithOnlyZeros = false,
   }) : super(key: key);
 
   @override
@@ -281,7 +285,13 @@ class BankBranchTextFormField extends StatelessWidget {
   String? _validateBranchNumber(String? text) {
     if (text == null || text.isEmpty) {
       return invalidInputsMenssage;
-    } else if (bankCode == 001 || bankCode == 237) {
+    }
+
+    if (notAllowBranchWithOnlyZeros && _notAllowBranchWithOnlyZeros(text)) {
+      return invalidInputsMenssage;
+    }
+
+    if (bankCode == 001 || bankCode == 237) {
       final response = BankBranchValidationService().validateBranchNumber(
         bankBranchModel: BankBranchModel(
           bankCode: bankCode,
@@ -298,4 +308,10 @@ class BankBranchTextFormField extends StatelessWidget {
 
   String _invalidValueMessage(String? digit) =>
       incorrectBranchDigitMenssage.replaceFirst(_replaceArgRegex, digit ?? "");
+
+  bool _notAllowBranchWithOnlyZeros(String text) {
+    var value = text.replaceAll("-", "").replaceAll("0", "");
+
+    return value.isEmpty;
+  }
 }
