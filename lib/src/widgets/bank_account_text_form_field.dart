@@ -170,6 +170,9 @@ class BankAccountTextFormField extends StatelessWidget {
   /// TextFormField parameter
   final bool enableIMEPersonalizedLearning;
 
+  /// TextFormField parameter
+  final bool notAllowAccountWithOnlyZeros;
+
   /// @construct [BankAccountTextFormField]
   BankAccountTextFormField({
     required this.controller,
@@ -227,6 +230,7 @@ class BankAccountTextFormField extends StatelessWidget {
     this.autovalidateMode,
     this.scrollController,
     this.restorationId,
+    this.notAllowAccountWithOnlyZeros = false,
   }) : super(key: key);
 
   @override
@@ -292,6 +296,9 @@ class BankAccountTextFormField extends StatelessWidget {
     if (text == null || text.isEmpty) {
       return invalidInputsMenssage;
     }
+    if (notAllowAccountWithOnlyZeros && _notAllowAccountWithOnlyZeros(text)) {
+      return invalidInputsMenssage;
+    }
     final response = BankAccountValidationService().validateAccountNumber(
       bankAccountModel: BankAccountModel(
         accountNumberWithDigit: text,
@@ -312,4 +319,11 @@ class BankAccountTextFormField extends StatelessWidget {
 
   String _invalidValueMessage(String? digit) =>
       incorrectAccountDigitMenssage.replaceFirst(_replaceArgRegex, digit ?? "");
+
+  bool _notAllowAccountWithOnlyZeros(String text) {
+    var value =
+        text.replaceAll("-", "").replaceAll(".", "").replaceAll("0", "");
+
+    return value.isEmpty;
+  }
 }
