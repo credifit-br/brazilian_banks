@@ -1,5 +1,9 @@
 # Release Changelog
 
+## [0.5.1]
+
+fix: add inputFormatters on BankBranchTextFormField and BankAccountTextFormField
+
 ## [0.5.0]
 
 feat: Not allow account and branch with only zeros

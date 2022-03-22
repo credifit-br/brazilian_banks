@@ -167,6 +167,9 @@ class BankBranchTextFormField extends StatelessWidget {
   /// TextFormField parameter
   final bool notAllowBranchWithOnlyZeros;
 
+  /// TextFormField parameter
+  final List<TextInputFormatter>? inputFormatters;
+
   /// @construct [BankBranchTextFormField]
   BankBranchTextFormField({
     required this.controller,
@@ -223,6 +226,7 @@ class BankBranchTextFormField extends StatelessWidget {
     this.scrollController,
     this.restorationId,
     this.notAllowBranchWithOnlyZeros = false,
+    this.inputFormatters,
   }) : super(key: key);
 
   @override
@@ -247,7 +251,10 @@ class BankBranchTextFormField extends StatelessWidget {
       expands: expands,
       focusNode: focusNode,
       initialValue: initialValue,
-      inputFormatters: [BranchInputFormatter(bankCode: bankCode)],
+      inputFormatters: [
+        ...?inputFormatters,
+        BranchInputFormatter(bankCode: bankCode)
+      ],
       keyboardAppearance: keyboardAppearance,
       keyboardType: keyboardType,
       maxLength: maxLength,

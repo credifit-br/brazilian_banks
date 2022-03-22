@@ -173,6 +173,9 @@ class BankAccountTextFormField extends StatelessWidget {
   /// TextFormField parameter
   final bool notAllowAccountWithOnlyZeros;
 
+  /// TextFormField parameter
+  final List<TextInputFormatter>? inputFormatters;
+
   /// @construct [BankAccountTextFormField]
   BankAccountTextFormField({
     required this.controller,
@@ -231,6 +234,7 @@ class BankAccountTextFormField extends StatelessWidget {
     this.scrollController,
     this.restorationId,
     this.notAllowAccountWithOnlyZeros = false,
+    this.inputFormatters,
   }) : super(key: key);
 
   @override
@@ -256,6 +260,7 @@ class BankAccountTextFormField extends StatelessWidget {
       focusNode: focusNode,
       initialValue: initialValue,
       inputFormatters: [
+        ...?inputFormatters,
         AccountInputFormatter(bankCode: bankCode, accountType: accountType)
       ],
       keyboardAppearance: keyboardAppearance,
