@@ -34,6 +34,7 @@ jobs:
 
   publish:
     runs-on: ubuntu-latest
+    needs: [flutter_test]
     container:
       image: google/dart:latest
     steps:

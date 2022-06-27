@@ -1,20 +1,24 @@
 # Release Changelog
 
+## [0.5.2]
+
+* feat: Add CI/CD
+
 ## [0.5.1]
 
-fix: add inputFormatters on BankBranchTextFormField and BankAccountTextFormField
+* fix: add inputFormatters on BankBranchTextFormField and BankAccountTextFormField
 
 ## [0.5.0]
 
-feat: Not allow account and branch with only zeros
+* feat: Not allow account and branch with only zeros
 
 ## [0.4.3]
 
-feat: Remove P and X validations for Bradesco and Banco do Brasil
+* feat: Remove P and X validations for Bradesco and Banco do Brasil
 
 ## [0.4.2]
 
-fix: downgrade dart sdk version
+* fix: downgrade dart sdk version
 
 ## [0.4.1]
 
