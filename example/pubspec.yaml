@@ -1,12 +1,12 @@
 name: example
 description: A new Flutter project.
 
-publish_to: 'none' 
+publish_to: "none"
 
 version: 1.0.0+1
 
 environment:
-  sdk: ">=2.13.0 <3.0.0"
+  sdk: ">=2.17.0 <3.0.0"
 
 dependencies:
   brazilian_banks:
@@ -22,6 +22,4 @@ dev_dependencies:
     sdk: flutter
 
 flutter:
-
   uses-material-design: true
-
