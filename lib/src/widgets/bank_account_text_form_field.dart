@@ -326,8 +326,12 @@ class BankAccountTextFormField extends StatelessWidget {
       incorrectAccountDigitMenssage.replaceFirst(_replaceArgRegex, digit ?? "");
 
   bool _notAllowAccountWithOnlyZeros(String text) {
-    var value =
-        text.replaceAll("-", "").replaceAll(".", "").replaceAll("0", "");
+    var value = text
+        .replaceAll("013  ", "")
+        .replaceAll("1288  ", "")
+        .replaceAll("-", "")
+        .replaceAll(".", "")
+        .replaceAll("0", "");
 
     return value.isEmpty;
   }
