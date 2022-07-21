@@ -284,4 +284,32 @@ void main() {
     final erroText = find.text("invalidInputsMenssage");
     expect(erroText, findsOneWidget);
   });
+
+  testWidgets(
+      'Not Allow CEF account with only zeros when account type is saving',
+      (WidgetTester tester) async {
+    await tester.pumpWidget(_bankAccountTextFormFieldTest(
+        bankCode: 104,
+        accountType: AccountType.saving,
+        branchNumber: '0000',
+        notAllowAccountWithOnlyZeros: true));
+
+    await tester.pumpAndSettle();
+    final accountFieldFinder = find.byType(BankAccountTextFormField);
+    expect(accountFieldFinder, findsOneWidget);
+    await tester.tap(accountFieldFinder);
+    await tester.pumpAndSettle();
+    await tester.enterText(accountFieldFinder, "00000-0");
+    await tester.pumpAndSettle();
+
+    final accountTextFinder = find.text("013  00000000-0");
+    expect(accountTextFinder, findsOneWidget);
+
+    final buttonFieldFinder = find.byType(ElevatedButton);
+    await tester.tap(buttonFieldFinder);
+    await tester.pumpAndSettle();
+
+    final erroText = find.text("invalidInputsMenssage");
+    expect(erroText, findsOneWidget);
+  });
 }
