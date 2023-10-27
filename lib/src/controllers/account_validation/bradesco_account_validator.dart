@@ -2,8 +2,8 @@ import 'package:brazilian_banks/src/models/bank_account_model.dart';
 import 'package:brazilian_banks/src/models/bank_account_validation_model.dart';
 
 extension on String {
-  List<String> splitByLength(int length) =>
-      [substring(0, length - length), substring(length - length)];
+  List<String> splitByLength(int l) =>
+      [substring(0, length - l), substring(length - l)];
 }
 
 const _accountLen = 7;
