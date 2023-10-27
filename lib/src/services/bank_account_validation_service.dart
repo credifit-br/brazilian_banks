@@ -12,7 +12,7 @@ class BankAccountValidationService extends IBankAccountValidationService {
   BankAccountValidation validateAccountNumber({
     required BankAccountModel bankAccountModel,
   }) {
-    final _bankAccountValidation = BankAccountValidation();
+    final bankAccountValidation = BankAccountValidation();
     switch (bankAccountModel.bankCode) {
       case 001:
         return bancoDoBrasilAccountValidator(bankAccountModel);
@@ -23,8 +23,8 @@ class BankAccountValidationService extends IBankAccountValidationService {
       case 341:
         return itauAccountValidator(bankAccountModel);
       default:
-        _bankAccountValidation.errorMessage = "banco não suportado";
-        return _bankAccountValidation;
+        bankAccountValidation.errorMessage = "banco não suportado";
+        return bankAccountValidation;
     }
   }
 }

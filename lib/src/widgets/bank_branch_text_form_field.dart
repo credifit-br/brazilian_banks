@@ -60,9 +60,6 @@ class BankBranchTextFormField extends StatelessWidget {
   final bool readOnly;
 
   /// TextFormField parameter
-  final ToolbarOptions? toolbarOptions;
-
-  /// TextFormField parameter
   final bool? showCursor;
 
   /// TextFormField parameter
@@ -176,7 +173,7 @@ class BankBranchTextFormField extends StatelessWidget {
     required this.bankCode,
     required this.incorrectBranchDigitMenssage,
     required this.invalidInputsMenssage,
-    Key? key,
+    super.key,
     this.focusNode,
     this.enableIMEPersonalizedLearning = true,
     this.decoration = const InputDecoration(),
@@ -200,7 +197,6 @@ class BankBranchTextFormField extends StatelessWidget {
     this.strutStyle,
     this.textDirection,
     this.textAlignVertical,
-    this.toolbarOptions,
     this.showCursor,
     this.smartDashesType,
     this.smartQuotesType,
@@ -227,7 +223,7 @@ class BankBranchTextFormField extends StatelessWidget {
     this.restorationId,
     this.notAllowBranchWithOnlyZeros = false,
     this.inputFormatters,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -284,7 +280,6 @@ class BankBranchTextFormField extends StatelessWidget {
       textCapitalization: textCapitalization,
       textDirection: textDirection,
       textInputAction: textInputAction,
-      toolbarOptions: toolbarOptions,
       validator: validator ?? _validateBranchNumber,
     );
   }

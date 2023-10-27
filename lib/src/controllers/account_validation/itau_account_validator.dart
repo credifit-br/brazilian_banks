@@ -2,8 +2,8 @@ import 'package:brazilian_banks/src/models/bank_account_model.dart';
 import 'package:brazilian_banks/src/models/bank_account_validation_model.dart';
 
 extension on String {
-  List<String> splitByLength(int _length) =>
-      [substring(0, length - _length), substring(length - _length)];
+  List<String> splitByLength(int l) =>
+      [substring(0, length - l), substring(length - l)];
 }
 
 const _accountLen = 5;
@@ -11,32 +11,31 @@ const _accountLen = 5;
 /// Itau - 341
 /// @param accountNumberWithDigit: can be in format "#-0" or "#0"
 BankAccountValidation itauAccountValidator(BankAccountModel bankAccountModel) {
-  final _bankAccountValidation = BankAccountValidation();
+  final bankAccountValidation = BankAccountValidation();
 
-  final _account = bankAccountModel.accountNumberWithDigit
+  final account = bankAccountModel.accountNumberWithDigit
       .replaceAll("-", "")
       .splitByLength(1);
-  final _accountNumber = _account[0].padLeft(_accountLen, '0');
-  final _branchAndAcccountNumber =
-      bankAccountModel.branchNumber + _accountNumber;
-  final _numbers = _branchAndAcccountNumber.split("");
+  final accountNumber = account[0].padLeft(_accountLen, '0');
+  final branchAndAcccountNumber = bankAccountModel.branchNumber + accountNumber;
+  final numbers = branchAndAcccountNumber.split("");
 
   var sumSequence = 0;
   var sequence = 0;
 
-  for (var i = 0; i < _numbers.length; i++) {
-    sequence = _multiplyAccordingParity(int.parse(_numbers[i]), i);
+  for (var i = 0; i < numbers.length; i++) {
+    sequence = _multiplyAccordingParity(int.parse(numbers[i]), i);
     sequence = _adjustAccordingLength(sequence);
     sumSequence += sequence;
   }
 
   final digit = _module(sumSequence);
 
-  _bankAccountValidation.isValid = digit == _account[1];
-  _bankAccountValidation.digit = digit;
-  _bankAccountValidation.account = _accountNumber;
+  bankAccountValidation.isValid = digit == account[1];
+  bankAccountValidation.digit = digit;
+  bankAccountValidation.account = accountNumber;
 
-  return _bankAccountValidation;
+  return bankAccountValidation;
 }
 
 String _module(int sumSequence) {
@@ -52,13 +51,13 @@ int _multiplyAccordingParity(int number, int index) {
 }
 
 int _adjustAccordingLength(int sequence) {
-  int _sequence = sequence;
-  if (_sequence > 9) {
-    final numbers = _sequence.toString().split("");
-    _sequence = 0;
+  int sequence0 = sequence;
+  if (sequence0 > 9) {
+    final numbers = sequence0.toString().split("");
+    sequence0 = 0;
     for (var i = 0; i < numbers.length; i++) {
-      _sequence += int.parse(numbers[i]);
+      sequence0 += int.parse(numbers[i]);
     }
   }
-  return _sequence;
+  return sequence0;
 }

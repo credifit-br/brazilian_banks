@@ -10,15 +10,15 @@ class BankBranchValidationService extends IBankBranchValidationService {
   BankBranchValidation validateBranchNumber({
     required BankBranchModel bankBranchModel,
   }) {
-    final _bankBranchValidation = BankBranchValidation();
+    final bankBranchValidation = BankBranchValidation();
     switch (bankBranchModel.bankCode) {
       case 001:
         return bancoDoBrasilBranchValidator(bankBranchModel);
       case 237:
         return bradescoBranchValidator(bankBranchModel);
       default:
-        _bankBranchValidation.errorMessage = "banco não suportado";
-        return _bankBranchValidation;
+        bankBranchValidation.errorMessage = "banco não suportado";
+        return bankBranchValidation;
     }
   }
 }

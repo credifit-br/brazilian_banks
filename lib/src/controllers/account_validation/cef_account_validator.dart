@@ -2,8 +2,8 @@ import 'package:brazilian_banks/src/models/bank_account_model.dart';
 import 'package:brazilian_banks/src/models/bank_account_validation_model.dart';
 
 extension on String {
-  List<String> splitByLength(int _length) =>
-      [substring(0, length - _length), substring(length - _length)];
+  List<String> splitByLength(int l) =>
+      [substring(0, length - l), substring(length - l)];
 }
 
 const _accountLen = 8;
@@ -18,34 +18,33 @@ const _multipliers = [8, 7, 6, 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2];
 /// @docs      Os três primeiros dígitos da conta são o tipo da conta
 /// @docs      (001 para Conta Corrente e 013 para Poupança)
 BankAccountValidation cefAccountValidator(BankAccountModel bankAccountModel) {
-  final _bankAccountValidation = BankAccountValidation();
+  final bankAccountValidation = BankAccountValidation();
 
-  final _account = bankAccountModel.accountNumberWithDigit
+  final account = bankAccountModel.accountNumberWithDigit
       .replaceAll("-", "")
       .replaceAll("001  ", "")
       .replaceAll("013  ", "")
       .splitByLength(1);
 
-  final _accountPrefix =
+  final accountPrefix =
       bankAccountModel.accountType == AccountType.checking ? '001' : '013';
-  final _accountNumber = _accountPrefix + _account[0].padLeft(_accountLen, '0');
-  final _branchAndAcccountNumber =
-      bankAccountModel.branchNumber + _accountNumber;
-  final _numbers = _branchAndAcccountNumber.split("");
+  final accountNumber = accountPrefix + account[0].padLeft(_accountLen, '0');
+  final branchAndAcccountNumber = bankAccountModel.branchNumber + accountNumber;
+  final numbers = branchAndAcccountNumber.split("");
 
   var sumSequence = 0;
 
-  for (var i = 0; i < _numbers.length; i++) {
-    sumSequence += int.parse(_numbers[i]) * _multipliers[i];
+  for (var i = 0; i < numbers.length; i++) {
+    sumSequence += int.parse(numbers[i]) * _multipliers[i];
   }
 
   final digit = _module(sumSequence * 10);
 
-  _bankAccountValidation.isValid = digit == _account[1];
-  _bankAccountValidation.digit = digit;
-  _bankAccountValidation.account = _account[0].padLeft(_accountLen, '0');
+  bankAccountValidation.isValid = digit == account[1];
+  bankAccountValidation.digit = digit;
+  bankAccountValidation.account = account[0].padLeft(_accountLen, '0');
 
-  return _bankAccountValidation;
+  return bankAccountValidation;
 }
 
 String _module(int sumSequence) {
