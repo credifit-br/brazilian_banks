@@ -66,9 +66,6 @@ class BankAccountTextFormField extends StatelessWidget {
   final bool readOnly;
 
   /// TextFormField parameter
-  final ToolbarOptions? toolbarOptions;
-
-  /// TextFormField parameter
   final bool? showCursor;
 
   /// TextFormField parameter
@@ -184,7 +181,7 @@ class BankAccountTextFormField extends StatelessWidget {
     required this.branchNumber,
     required this.incorrectAccountDigitMenssage,
     required this.invalidInputsMenssage,
-    Key? key,
+    super.key,
     this.focusNode,
     this.enableIMEPersonalizedLearning = true,
     this.decoration = const InputDecoration(),
@@ -208,7 +205,6 @@ class BankAccountTextFormField extends StatelessWidget {
     this.strutStyle,
     this.textDirection,
     this.textAlignVertical,
-    this.toolbarOptions,
     this.showCursor,
     this.smartDashesType,
     this.smartQuotesType,
@@ -235,7 +231,7 @@ class BankAccountTextFormField extends StatelessWidget {
     this.restorationId,
     this.notAllowAccountWithOnlyZeros = false,
     this.inputFormatters,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -292,7 +288,6 @@ class BankAccountTextFormField extends StatelessWidget {
       textCapitalization: textCapitalization,
       textDirection: textDirection,
       textInputAction: textInputAction,
-      toolbarOptions: toolbarOptions,
       validator: validator ?? _validateAccountNumber,
     );
   }
